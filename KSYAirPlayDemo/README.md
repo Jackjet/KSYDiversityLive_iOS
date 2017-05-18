@@ -56,4 +56,4 @@
 [xindawn]:http://xindawn.com/
 [libksygpulive]:https://github.com/ksvc/KSYLive_iOS
 [ReplayKit]:https://github.com/ksvc/KSYDiversityLive_iOS/tree/master/KSYReplayKit
-[Airplay]:https://github.com/ksvc/KSYDiversityLive_iOS/edit/master/KSYAirPlayDemo/README.md
+[Airplay]:https://github.com/ksvc/KSYDiversityLive_iOS/edit/master/KSYAirPlayDemo
