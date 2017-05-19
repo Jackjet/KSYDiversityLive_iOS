@@ -52,7 +52,7 @@
 1. 2016年10月28日，支持[涂图SDK美颜方案](TuSDK)；
 1. 2016年12月2日，支持[商汤科技动态贴纸方案](SenseTime);
 1. 2016年12月5日，基于[声网连麦方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/agora_v1.0.0)上线；
-1. 2017年5月18日，基于Airplay的[任意录屏方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
+1. 2017年5月18日，基于xindawn的[Airplay任意录屏方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
 
 ## 反馈与建议
 - 主页：[金山云](http://v.ksyun.com)
