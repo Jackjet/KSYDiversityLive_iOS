@@ -27,14 +27,15 @@
 
 ## 功能
 [KSYDiversityLive](https://github.com/ksvc/KSYDiversityLive_iOS)将提供以下功能。同时也欢迎大家提新的功能需求。
-* [游戏录屏直播](KSYReplayKit)
-* 应用内录屏
-* 短视频录制
-* 动态贴纸
+* [ReplayKit游戏录屏直播](KSYReplayKit)
+* [Airplay录屏直播](KSYAirPlayDemo)
+* [应用内录屏](https://github.com/ksvc/KSYMediaPlayer_iOS/wiki/playerRecord)
+* [短视频编辑](https://github.com/ksvc/KSYMediaEditorKit_iOS)
+* 动态贴纸：[商汤科技](SenseTime)、[项芯科技](FaceUnitySDK)
 * 无人机直播
-* 多种美颜
-* 画中画
-* 连麦
+* 多种美颜：[涂图美颜](TuSDK)
+* [画中画](https://github.com/ksvc/KSYLive_iOS/wiki/pip)
+* 连麦：[声网连麦](agoraRtc)、[金山云连麦]（https://github.com/ksvc/KSYRTCLive_iOS）
 
 ## 开发合作
 任何企业、个人都可以参与，提供的SDK付费、免费都可以。不限于以下的合作场景：
@@ -45,11 +46,13 @@
 
 ## 大事记
 
-1. 2016.09.26，[连麦v1.5.0稳定版本](https://github.com/ksvc/KSYRTCLive_iOS)开放测试
+1. 2016.09.26，[金山云连麦v1.5.0稳定版本](https://github.com/ksvc/KSYRTCLive_iOS)开放测试
 1. 2016.10.20，基于Replaykit(iOS10+)的[游戏录屏体验版](KSYReplayKit)demo代码开放 
 1. 2016年10月28日，支持[Faceunity动态贴纸方案](FaceUnitySDK)；
 1. 2016年10月28日，支持[涂图SDK美颜方案](TuSDK)；
 1. 2016年12月2日，支持[商汤科技动态贴纸方案](SenseTime);
+1. 2016年12月5日，基于[声网连麦方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/agora_v1.0.0)上线；
+1. 2017年5月18日，基于Airplay的[任意录屏方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
 
 ## 反馈与建议
 - 主页：[金山云](http://v.ksyun.com)
