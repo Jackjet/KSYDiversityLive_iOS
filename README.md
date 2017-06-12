@@ -36,7 +36,6 @@
 * 无人机直播，已经支持多家无人机、云台直播方案，请直接联系商务
 * 多种美颜：[涂图美颜](TuSDK)
 * [画中画](https://github.com/ksvc/KSYLive_iOS/wiki/pip)
-* 连麦：[声网连麦](agoraRtc)、[金山云连麦]（https://github.com/ksvc/KSYRTCLive_iOS）
 
 ### 5. 开发合作
 任何企业、个人都可以参与，提供的SDK付费、免费都可以。不限于以下的合作场景：
@@ -47,7 +46,6 @@
 
 ### 6.大事记
 
-1. 2016.09.26，[金山云连麦v1.5.0稳定版本](https://github.com/ksvc/KSYRTCLive_iOS)开放测试
 1. 2016.10.20，基于Replaykit(iOS10+)的[游戏录屏](KSYReplayKit)代码开放 
 1. 2016年10月28日，支持[Faceunity动态贴纸方案](FaceUnitySDK)；
 1. 2016年10月28日，支持[涂图SDK美颜方案](TuSDK)；
