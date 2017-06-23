@@ -131,6 +131,9 @@ inline static int64_t getABSTime() {
 - (void)screenRecorder:(XDWScreenRecorder *)screenRecorder didStartRecordingWithVideoSize:(CGSize)videoSize {
     NSLog(@"width: %.f, height: %.f", videoSize.width, videoSize.height);
     _kit.streamDimension = videoSize;
+    [[AVAudioSession sharedInstance]  setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [[AVAudioSession sharedInstance] setMode:AVAudioSessionModeVoiceChat error:nil];
+    [[AVAudioSession sharedInstance]  overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
     [_kit startAudioCap];
 }
 
@@ -144,6 +147,8 @@ inline static int64_t getABSTime() {
 
 - (void)screenRecorderDidStopRecording:(XDWScreenRecorder *)screenRecorder {
     [_kit.aCapDev  stopCapture];
+    [[AVAudioSession sharedInstance]  setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
+    [[AVAudioSession sharedInstance]  overrideOutputAudioPort:AVAudioSessionPortOverrideNone error:nil];
 }
 
 @end
