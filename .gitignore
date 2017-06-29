@@ -25,4 +25,5 @@ xcuserdata
 project.xcworkspace/
 #build/
 *.log
+Podfile.lock
 #framework/

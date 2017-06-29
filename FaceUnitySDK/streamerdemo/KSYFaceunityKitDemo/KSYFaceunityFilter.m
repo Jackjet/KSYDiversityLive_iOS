@@ -63,7 +63,7 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
     if(self)
     {
         
-        _queue = dispatch_queue_create("com.ksyun.faceunity.queue", DISPATCH_QUEUE_SERIAL_WITH_AUTORELEASE_POOL);
+        _queue = dispatch_queue_create("com.ksyun.faceunity.queue", DISPATCH_QUEUE_SERIAL);
         
         itemArray = [items copy];
         
