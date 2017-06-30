@@ -17,7 +17,6 @@
 		E3142FBF1DC357AB00F88070 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3142FBD1DC357AB00F88070 /* LaunchScreen.storyboard */; };
 		E315AA0F1DDD6272008E31E2 /* KSYFileSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = E315AA061DDD6272008E31E2 /* KSYFileSelector.m */; };
 		E315AA101DDD6272008E31E2 /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E315AA081DDD6272008E31E2 /* KSYNameSlider.m */; };
-		E315AA111DDD6272008E31E2 /* KSYReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E315AA0A1DDD6272008E31E2 /* KSYReachability.m */; };
 		E315AA121DDD6272008E31E2 /* KSYUIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E315AA0C1DDD6272008E31E2 /* KSYUIVC.m */; };
 		E315AA131DDD6272008E31E2 /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = E315AA0E1DDD6272008E31E2 /* KSYUIView.m */; };
 		E32BF0721E30ACE100DCCE20 /* KSYFaceunityFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E32BF0711E30ACE100DCCE20 /* KSYFaceunityFilter.m */; };
@@ -79,8 +78,6 @@
 		E315AA061DDD6272008E31E2 /* KSYFileSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYFileSelector.m; path = KSYUIUtils/KSYFileSelector.m; sourceTree = SOURCE_ROOT; };
 		E315AA071DDD6272008E31E2 /* KSYNameSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYNameSlider.h; path = KSYUIUtils/KSYNameSlider.h; sourceTree = SOURCE_ROOT; };
 		E315AA081DDD6272008E31E2 /* KSYNameSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYNameSlider.m; path = KSYUIUtils/KSYNameSlider.m; sourceTree = SOURCE_ROOT; };
-		E315AA091DDD6272008E31E2 /* KSYReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYReachability.h; path = KSYUIUtils/KSYReachability.h; sourceTree = SOURCE_ROOT; };
-		E315AA0A1DDD6272008E31E2 /* KSYReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYReachability.m; path = KSYUIUtils/KSYReachability.m; sourceTree = SOURCE_ROOT; };
 		E315AA0B1DDD6272008E31E2 /* KSYUIVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYUIVC.h; path = KSYUIUtils/KSYUIVC.h; sourceTree = SOURCE_ROOT; };
 		E315AA0C1DDD6272008E31E2 /* KSYUIVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KSYUIVC.m; path = KSYUIUtils/KSYUIVC.m; sourceTree = SOURCE_ROOT; };
 		E315AA0D1DDD6272008E31E2 /* KSYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KSYUIView.h; path = KSYUIUtils/KSYUIView.h; sourceTree = SOURCE_ROOT; };
@@ -211,8 +208,6 @@
 				E315AA061DDD6272008E31E2 /* KSYFileSelector.m */,
 				E315AA071DDD6272008E31E2 /* KSYNameSlider.h */,
 				E315AA081DDD6272008E31E2 /* KSYNameSlider.m */,
-				E315AA091DDD6272008E31E2 /* KSYReachability.h */,
-				E315AA0A1DDD6272008E31E2 /* KSYReachability.m */,
 				E315AA0B1DDD6272008E31E2 /* KSYUIVC.h */,
 				E315AA0C1DDD6272008E31E2 /* KSYUIVC.m */,
 				E315AA0D1DDD6272008E31E2 /* KSYUIView.h */,
@@ -406,7 +401,6 @@
 				E3142FB71DC357AB00F88070 /* KSYFaceunityVC.m in Sources */,
 				E385471E1DEAE4CE0049D09C /* KSYPresetCfgView.m in Sources */,
 				E3142FB41DC357AB00F88070 /* AppDelegate.m in Sources */,
-				E315AA111DDD6272008E31E2 /* KSYReachability.m in Sources */,
 				E315AA0F1DDD6272008E31E2 /* KSYFileSelector.m in Sources */,
 				E315AA131DDD6272008E31E2 /* KSYUIView.m in Sources */,
 				E385471C1DEAE4CE0049D09C /* KSYCtrlView.m in Sources */,
