@@ -4,7 +4,6 @@
 
 * demo位于https://github.com/ksvc/KSYDiversityLive_iOS/tree/master/FaceUnitySDK/playerdemo
 
-* wiki位于https://github.com/ksvc/KSYDiversityLive_iOS/wiki/PlayerAddFaceUnity
 
 ### 1. 集成方法
 
