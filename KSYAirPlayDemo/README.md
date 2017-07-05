@@ -51,7 +51,7 @@
 * videoBuffer 接口将收到的图像buffer 送入 KSYStreamerBase推流
 * screenRecorderDidStopRecording 接口结束音频采集
 
-### 5.说明
+### 5. 说明
 
 1. AirPlay分辨率
 
