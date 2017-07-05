@@ -51,6 +51,26 @@
 * videoBuffer 接口将收到的图像buffer 送入 KSYStreamerBase推流
 * screenRecorderDidStopRecording 接口结束音频采集
 
+### 5.说明
+
+1. AirPlay分辨率
+
+分辨率设置（四种分辨率）：width = height = {iPhone：720，854，1136，1280；iPad：576，640，832，960}
+
+[720,720]    = 404x720
+
+[854,854]    = 480x854
+
+[1136, 1136] = 638x1136
+
+[1280,1280] =  720x1280
+
+iOS 10系统的部分设备可能不支持低分辨率，比如iPhone 6/6s/6 plus/6s plus设备已经不支持720（416 * 720，或720 * 416）以下分辨率输出，请按实际情况做分辨率调整。
+
+2. AirPlay帧率
+
+帧率只能设置为 10,15,20,30,60，如需要其他帧率，比如24，可以设置为30，然后通过丢帧实现。
+
 [xindawn]:http://xindawn.com/
 [libksygpulive]:https://github.com/ksvc/KSYLive_iOS
 [ReplayKit]:https://github.com/ksvc/KSYDiversityLive_iOS/tree/master/KSYReplayKit
