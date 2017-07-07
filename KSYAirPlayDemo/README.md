@@ -1,7 +1,9 @@
-## 金山云iOS手游录屏直播方案（付费版本）
-当前手游录屏直播有两个方案：
+## 金山云第三方iOS手游录屏直播方案（付费版本）
+
+当前手游录屏直播有三个个方案：
 1. [ReplayKit][ReplayKit] 方案中，已经提供了完整的[ReplayKit][ReplayKit]的调用代码，使用免费。
-1. [Airplay][Airplay] 方案中，基于Airplay录屏部分由[xindawn][xindawn]提供，其余音频采集、编码、推流由[金山云直播SDK][libksygpulive]提供。需要向[xindawn][xindawn]付费，金山云不收取任何费用。
+1. [金山云自研Airplay][KSYAirStreamKit]方案中，Airplay录屏部分由金山云自研，其余音频采集、编码、推流由[金山云直播SDK][libksygpulive]提供。[金山云自研Airplay][KSYAirStreamKit]方案联网版本可以免费使用，离线版本需要付费购买。
+1. [第三方Airplay][Airplay] 方案中，Airplay录屏部分由[xindawn][xindawn]提供，其余音频采集、编码、推流由[金山云直播SDK][libksygpulive]提供。需要向[xindawn][xindawn]付费，金山云不收取任何费用。
 
 优缺点：
 1. [ReplayKit][ReplayKit]需要游戏支持，[Airplay][Airplay]对录屏对象没有要求。
@@ -75,3 +77,4 @@
 [libksygpulive]:https://github.com/ksvc/KSYLive_iOS
 [ReplayKit]:https://github.com/ksvc/KSYDiversityLive_iOS/tree/master/KSYReplayKit
 [Airplay]:https://github.com/ksvc/KSYDiversityLive_iOS/edit/master/KSYAirPlayDemo
+[KSYAirStreamKit]:https://github.com/ksvc/KSYAirStreamer_iOS
