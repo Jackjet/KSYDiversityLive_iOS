@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051E5F7A1F14BB1F0017C809 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E5F791F14BB1F0017C809 /* Accelerate.framework */; };
 		58F4608F1F028C4700BA3DFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F4608E1F028C4700BA3DFA /* main.m */; };
 		58F460921F028C4700BA3DFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F460911F028C4700BA3DFA /* AppDelegate.m */; };
 		58F460951F028C4700BA3DFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F460941F028C4700BA3DFA /* ViewController.m */; };
@@ -22,11 +23,10 @@
 		58F460BD1F0291AB00BA3DFA /* KSYUIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F460B21F0291AB00BA3DFA /* KSYUIVC.m */; };
 		58F460BE1F0291AB00BA3DFA /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F460B41F0291AB00BA3DFA /* KSYUIView.m */; };
 		58F460BF1F0291AB00BA3DFA /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F460B61F0291AB00BA3DFA /* QRViewController.m */; };
-		EA13DAC9AB59728955A86189 /* libPods-KSYFaceUnityPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC4FCF086F5FB2D29803D27 /* libPods-KSYFaceUnityPlayerDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		366781132102B1A45A18EEF5 /* Pods-KSYFaceUnityPlayerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYFaceUnityPlayerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KSYFaceUnityPlayerDemo/Pods-KSYFaceUnityPlayerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		051E5F791F14BB1F0017C809 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		58F4608A1F028C4700BA3DFA /* KSYFaceUnityPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSYFaceUnityPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F4608E1F028C4700BA3DFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		58F460901F028C4700BA3DFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,8 +55,6 @@
 		58F460B41F0291AB00BA3DFA /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
 		58F460B51F0291AB00BA3DFA /* QRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRViewController.h; sourceTree = "<group>"; };
 		58F460B61F0291AB00BA3DFA /* QRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
-		62B2ADBC3A363C3AD3EE3CC8 /* Pods-KSYFaceUnityPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KSYFaceUnityPlayerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KSYFaceUnityPlayerDemo/Pods-KSYFaceUnityPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
-		AEC4FCF086F5FB2D29803D27 /* libPods-KSYFaceUnityPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KSYFaceUnityPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA13DAC9AB59728955A86189 /* libPods-KSYFaceUnityPlayerDemo.a in Frameworks */,
+				051E5F7A1F14BB1F0017C809 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +72,7 @@
 		2E8388F2CEC3F5B4FC0745AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AEC4FCF086F5FB2D29803D27 /* libPods-KSYFaceUnityPlayerDemo.a */,
+				051E5F791F14BB1F0017C809 /* Accelerate.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,7 +82,6 @@
 			children = (
 				58F4608C1F028C4700BA3DFA /* KSYFaceUnityPlayerDemo */,
 				58F4608B1F028C4700BA3DFA /* Products */,
-				C878CFB82C557AC7BDEFD262 /* Pods */,
 				2E8388F2CEC3F5B4FC0745AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -147,15 +144,6 @@
 			path = KSYUIUtils;
 			sourceTree = "<group>";
 		};
-		C878CFB82C557AC7BDEFD262 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				366781132102B1A45A18EEF5 /* Pods-KSYFaceUnityPlayerDemo.debug.xcconfig */,
-				62B2ADBC3A363C3AD3EE3CC8 /* Pods-KSYFaceUnityPlayerDemo.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -163,12 +151,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58F460A11F028C4800BA3DFA /* Build configuration list for PBXNativeTarget "KSYFaceUnityPlayerDemo" */;
 			buildPhases = (
-				DF98DA2A4274C596A345A56B /* [CP] Check Pods Manifest.lock */,
 				58F460861F028C4700BA3DFA /* Sources */,
 				58F460871F028C4700BA3DFA /* Frameworks */,
 				58F460881F028C4700BA3DFA /* Resources */,
-				6DA8B0B1C3B40351CB6B1574 /* [CP] Embed Pods Frameworks */,
-				AB8EEF31E0BA4F8319FAFA76 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,54 +210,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6DA8B0B1C3B40351CB6B1574 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYFaceUnityPlayerDemo/Pods-KSYFaceUnityPlayerDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB8EEF31E0BA4F8319FAFA76 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KSYFaceUnityPlayerDemo/Pods-KSYFaceUnityPlayerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF98DA2A4274C596A345A56B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58F460861F028C4700BA3DFA /* Sources */ = {
@@ -410,7 +347,6 @@
 		};
 		58F460A21F028C4800BA3DFA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 366781132102B1A45A18EEF5 /* Pods-KSYFaceUnityPlayerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZGJ54Q7R45;
@@ -424,7 +360,6 @@
 		};
 		58F460A31F028C4800BA3DFA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62B2ADBC3A363C3AD3EE3CC8 /* Pods-KSYFaceUnityPlayerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZGJ54Q7R45;

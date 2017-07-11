@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051E5F781F14B0A20017C809 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E5F771F14B0A20017C809 /* Accelerate.framework */; };
 		C3C37F661E8A5EA50060DA49 /* heart.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3C37F641E8A5EA50060DA49 /* heart.bundle */; };
 		C3C37F671E8A5EA50060DA49 /* tears.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3C37F651E8A5EA50060DA49 /* tears.bundle */; };
 		E3142FB11DC357AB00F88070 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3142FB01DC357AB00F88070 /* main.m */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		051E5F771F14B0A20017C809 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C3C37F641E8A5EA50060DA49 /* heart.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; path = heart.bundle; sourceTree = "<group>"; };
 		C3C37F651E8A5EA50060DA49 /* tears.bundle */ = {isa = PBXFileReference; lastKnownFileType = file; path = tears.bundle; sourceTree = "<group>"; };
 		E3142FAC1DC357AB00F88070 /* KSYFaceunityKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KSYFaceunityKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051E5F781F14B0A20017C809 /* Accelerate.framework in Frameworks */,
 				E32BF1221E30B59300DCCE20 /* libnama.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,11 +142,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70E4E68A8B9FF423CF294B1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				051E5F771F14B0A20017C809 /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E3142FA31DC357AB00F88070 = {
 			isa = PBXGroup;
 			children = (
 				E3142FAE1DC357AB00F88070 /* KSYFaceunityKitDemo */,
 				E3142FAD1DC357AB00F88070 /* Products */,
+				70E4E68A8B9FF423CF294B1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
