@@ -6,43 +6,39 @@
 
 static int g_frame_id = 0;
 
-static size_t osal_GetFileSize(int fd){
+static int osal_GetFileSize(int fd){
     struct stat sb;
     sb.st_size = 0;
     fstat(fd, &sb);
-    return (size_t)sb.st_size;
+    return (int)sb.st_size;
 }
-static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
+static void* mmap_bundle(NSString* fn_bundle,int* psize){
     // Load item from predefined item bundle
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fn_bundle];
     //    path = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]stringByAppendingPathComponent:fn_bundle];
     const char *fn = [path UTF8String];
     int fd = open(fn,O_RDONLY);
     void* g_res_zip = NULL;
-    size_t g_res_size = 0;
+    int g_res_size = 0;
     if(fd == -1){
         NSLog(@"faceunity: failed to open bundle");
         g_res_size = 0;
     }else{
         g_res_size = osal_GetFileSize(fd);
         g_res_zip = mmap(NULL, g_res_size, PROT_READ, MAP_SHARED, fd, 0);
-        NSLog(@"faceunity: %@ mapped %08x %ld\n", path, (unsigned int)g_res_zip, g_res_size);
+        NSLog(@"faceunity: %@ mapped %08x %d\n", path, (unsigned int)g_res_zip, g_res_size);
+        close(fd);
     }
     *psize = g_res_size;
     return g_res_zip;
-    return nil;
 }
 
 
 @interface KSYFaceunityFilter()
 {
     
-    int _lastItem;
-    
     // items' bundle name
     NSArray *itemArray;
-    
-    NSLock *_lock;
     
     int curItems[3];
 }
@@ -62,24 +58,18 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
     
     if(self)
     {
-        
         _queue = dispatch_queue_create("com.ksyun.faceunity.queue", DISPATCH_QUEUE_SERIAL);
-        
+
         itemArray = [items copy];
         
         [self initFaceUnity];
         
-        if (curItems[0] == 0) {
-            [self loadItem:items.firstObject];
-        }
+        [self loadItem:items.firstObject];
         
-        if (curItems[1] == 0) {
-            [self loadFilter];
-        }
+        [self loadFilter];
         
-        if (curItems[2] == 0) {
-            [self loadHeart];
-        }
+        [self loadHeart];
+        
         _pipOut = [[KSYGPUPicOutput alloc]initWithOutFmt:kCVPixelFormatType_32BGRA];
         __weak KSYFaceunityFilter *weak_filter = self;
         _pipOut.videoProcessingCallback = ^(CVPixelBufferRef pixelBuffer, CMTime timeInfo){
@@ -87,7 +77,27 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
         };
     }
     return self;
-    
+}
+
+#pragma -Faceunity Load Data
+- (void)loadItem:(NSString *)itemName
+{
+    dispatch_sync(self.queue, ^{
+        if(![EAGLContext setCurrentContext:_gl_context]){
+            NSLog(@"faceunity: failed to create / set a GLES2 context");
+        }
+        int size;
+        void* data = mmap_bundle(itemName, &size);
+        
+        int itemHandle = [FURenderer createItemFromPackage:data size:size];
+        
+        if (curItems[0] != 0) {
+            NSLog(@"faceunity: destroy item");
+            [FURenderer destroyItem:curItems[0]];
+        }
+        
+        curItems[0] = itemHandle;
+    });
 }
 
 - (id) init {
@@ -96,46 +106,25 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
 
 -(void)dealloc{
     _pipOut = nil;
-    _lock = nil;
-    fuDestroyAllItems();
-}
-
--(void)loadItem:(NSString *)itemName{
-    dispatch_sync(self.queue, ^{
-        if(![EAGLContext setCurrentContext:_gl_context]){
-            NSLog(@"faceunity: failed to create / set a GLES2 context");
-        }
-        
-        intptr_t size;
-        void* data = mmap_bundle(itemName, &size);
-        int itemId = fuCreateItemFromPackage(data, (int)size);
-        
-        [_lock lock];
-        _lastItem = curItems[0];
-        curItems[0] = itemId;
-        [_lock unlock];
-    });
-}
-
-- (void)destroyItem:(int)item {
-    dispatch_sync(self.queue, ^{
-        fuDestroyItem(item);
-    });
+    [FURenderer destroyAllItems];
+    for (int i = 0; i < sizeof(curItems) / sizeof(int); i++) {
+        curItems[i] = 0;
+    }
 }
 
 #pragma mark - load filter
 - (void)loadFilter
 {
-    intptr_t size = 0;
+    int size = 0;
     
     void *data = mmap_bundle(@"face_beautification.bundle", &size);
     
-    curItems[1] = fuCreateItemFromPackage(data, (int)size);
+    curItems[1] = [FURenderer createItemFromPackage:data size:size];
 }
 
 #pragma mark - load filter
 - (void)loadHeart{
-    intptr_t size = 0;
+    int size = 0;
     
     void *data = mmap_bundle(@"heart.bundle", &size);
     
@@ -150,23 +139,23 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
         if(![EAGLContext setCurrentContext:_gl_context]){
             NSLog(@"faceunity: failed to create / set a GLES2 context");
         }
-        
-        //设置美颜效果
-        // 滤镜 "nature", "delta", "electric", "slowlived", "tokyo", "warm"
-        fuItemSetParams(curItems[1], "filter_name", "nature");
+        /*设置美颜效果（滤镜、磨皮、美白、瘦脸、大眼....）*/
         // 瘦脸 （大于等于0的浮点数，0为关闭效果，1为默认效果，大于1为进一步增强效果）
-        fuItemSetParamd(curItems[1], "cheek_thinning", 1.0);
+        [FURenderer itemSetParam:curItems[1] withName:@"cheek_thinning" value:@(1.0)]; //瘦脸
         // 大眼 （大于等于0的浮点数，0为关闭效果，1为默认效果，大于1为进一步增强效果）
-        fuItemSetParamd(curItems[1], "eye_enlarging", 1.0);
+        [FURenderer itemSetParam:curItems[1] withName:@"eye_enlarging" value:@(1.0)]; //大眼
         // 美白 （大于等于0的浮点数，0为关闭效果，1为默认效果，大于1为进一步增强效果）
-        fuItemSetParamd(curItems[1], "color_level", 0.5);
+        [FURenderer itemSetParam:curItems[1] withName:@"color_level" value:@(0.5)]; //美白
+        // 滤镜 "nature", "delta", "electric", "slowlived", "tokyo", "warm"
+        [FURenderer itemSetParam:curItems[1] withName:@"filter_name" value:@"nature"]; //滤镜
         // 磨皮 取值范围为0-6
-        fuItemSetParamd(curItems[1], "blur_level", 5.0);
+        [FURenderer itemSetParam:curItems[1] withName:@"blur_level" value:@(5.0)]; //磨皮
+        [FURenderer itemSetParam:curItems[1] withName:@"face_shape" value:@(3)]; //瘦脸类型
+        [FURenderer itemSetParam:curItems[1] withName:@"face_shape_level" value:@(0.5)]; //瘦脸等级
+        [FURenderer itemSetParam:curItems[1] withName:@"red_level" value:@(0.5)]; //红润
         
-        
-        // itemCount
-        CVPixelBufferRef output_pixelBuffer = [[FURenderer shareRenderer] renderPixelBuffer:pixelBuffer withFrameId:g_frame_id items:curItems itemCount:3];
-        ++g_frame_id;
+        CVPixelBufferRef output_pixelBuffer = [[FURenderer shareRenderer] renderPixelBuffer:pixelBuffer withFrameId:g_frame_id items:curItems itemCount:3 flipx:YES];//flipx 参数设为YES可以使道具做水平方向的镜像翻转
+        g_frame_id += 1;
         [self processPixelBuffer:output_pixelBuffer time:timeInfo];
     });
 }
@@ -177,10 +166,12 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
     if(![EAGLContext setCurrentContext:_gl_context]){
         NSLog(@"faceunity: failed to create / set a GLES2 context");
     }
-    
-    intptr_t size = 0;
-    void* v3data = mmap_bundle(@"v3.bundle", &size);
-    [[FURenderer shareRenderer] setupWithData:v3data ardata:NULL authPackage:g_auth_package authSize:sizeof(g_auth_package)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        int size = 0;
+        void* v3data = mmap_bundle(@"v3.bundle", &size);
+        [[FURenderer shareRenderer] setupWithData:v3data ardata:NULL authPackage:&g_auth_package authSize:sizeof(g_auth_package) shouldCreateContext:YES];
+    });
 }
 
 #pragma GPUImageInput
@@ -234,7 +225,6 @@ static void* mmap_bundle(NSString* fn_bundle,intptr_t* psize){
     _choosedIndex = choosedIndex;
     
     [self loadItem:itemArray[choosedIndex]];
-    [self destroyItem:_lastItem];
 }
 
 @end
