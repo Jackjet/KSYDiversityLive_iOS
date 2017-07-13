@@ -65,6 +65,9 @@ public:
     {
         return true;
     }
+    virtual bool onMixedAudioFrame(AudioFrame& audioFrame){
+        return true;
+    }
 private:
     KSYAgoraClient* _kit;
 };
