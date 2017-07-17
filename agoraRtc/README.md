@@ -15,13 +15,13 @@ IOS 连麦功能 （KSYLive_IOS + agora） 金山云开放平台，提供SDK全�
 ```
  - 需要手动导入库文件：
 ```
-AgoraRtcEngineKit.framework
 videoprp.framework
 ```
  - pod方式导入库文件：
 ```
-pod 'libksygpulive/KSYGPUResource', 
-pod 'libksygpulive/libksygpulive',
+pod 'libksygpulive_ks3/KSYGPUResource', 
+pod 'libksygpulive_ks3/libksygpulive',
+pod 'AgoraRtcEngine_iOS',
 ```
  - 手动导入文件列表：
 ```
