@@ -52,6 +52,7 @@
 1. 2016年12月2日，支持[商汤科技动态贴纸方案](SenseTime);
 1. 2016年12月5日，基于[声网连麦方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/agora_v1.0.0)上线；
 1. 2017年5月18日，基于xindawn的[Airplay任意录屏方案(iOS 7.0+)](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
+1. 2017年7月1日，基于金山云自研的[Airplay手游录屏方案](https://github.com/ksvc/KSYAirStreamer_iOS/releases)上线；
 
 ### 7. 反馈与建议
 - 主页：[金山云](http://v.ksyun.com)
