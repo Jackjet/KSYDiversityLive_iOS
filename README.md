@@ -51,7 +51,7 @@
 
 ### 6.大事记
 
-1. 2016.10.20，基于Replaykit(iOS10+)的[游戏录屏](KSYReplayKit)代码开放 
+1. 2016年10月20日，基于Replaykit(iOS10+)的[游戏录屏](KSYReplayKit)代码开放 
 1. 2016年10月28日，支持[Faceunity动态贴纸方案](FaceUnitySDK)；
 1. 2016年10月28日，支持[涂图SDK美颜方案](TuSDK)；
 1. 2016年12月2日，支持[商汤科技动态贴纸方案](SenseTime);
