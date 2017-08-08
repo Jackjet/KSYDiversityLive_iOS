@@ -1,12 +1,14 @@
-IOS 贴纸、大眼瘦脸和美颜功能 （KSYLive_IOS + kiwi）
-金山云开放平台，提供SDK全链路数据，可以和容易和第三方数据处理服务商合作。以下是金山直播SDK和kiwi实现的贴纸功能（人脸识别+贴纸\大眼瘦脸\美颜）。
 
-## 参考资料
+## iOS 贴纸、大眼瘦脸和美颜功能 （KSYLive_IOS + kiwi）
+
+金山云开放平台，提供SDK全链路数据，可以和容易和第三方数据处理服务商合作。以下是金山直播SDK和[kiwi][kiwi]实现的贴纸功能（人脸识别+贴纸\大眼瘦脸\美颜）。
+
+### 1. 参考资料
 金山云直播SDK请参考 https://github.com/ksvc/KSYLive_iOS
 
-开为科技SDK请参考https://github.com/kiwi-face/KiwiFaceSDK_Demo_iOS
+开为科技SDK请参考  http://kiwiar.com/
 
-## 准备工作
+### 2.准备工作
 
 1. 下载kiwi的工程，GPUImage和视频采集采用kiwi的方式
 
@@ -25,7 +27,7 @@ pod 'libksygpulive/libksygpulive'
 ```
 其中GPUImage是kiwi提供的
 
-## 集成工作
+### 3. 集成工作
 
 1. 添加推流类KSYStreamerBase, 运行过程中提供对KSYStreamerBase的访问，同时添加音频采集类KSYAUAudioCapture,  控制音频的采集和推流处理.
 
@@ -36,7 +38,7 @@ pod 'libksygpulive/libksygpulive'
 * sampleBuffer 是加filter后的数据流，但是直接出来的数据需要进行旋转或镜像处理
 * processVideoPixelBuffer:timeInfo 是推流函数，将旋转或镜像处理后视频数据推到观众端
 
-## 接口介绍
+### 4. 接口介绍
 
 * 音频数据处理
 
@@ -62,3 +64,14 @@ pod 'libksygpulive/libksygpulive'
 - (void)processVideoPixelBuffer:(CVPixelBufferRef)pixelBuffer
 timeInfo:(CMTime)timeStamp;
 ```
+### 5. 商务合作
+* 金山云
+
+金山云直播SDK可以免费用于用于商业应用
+
+* kiwi
+
+请登录官网联系kiwi商务：http://kiwiar.com/
+
+
+[kiwi]:http://kiwiar.com/
