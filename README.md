@@ -36,6 +36,7 @@
 * 无人机直播，已经支持多家无人机、云台直播方案，请直接联系商务
 * 多种美颜：[涂图美颜](TuSDK)
 * [画中画](https://github.com/ksvc/KSYLive_iOS/wiki/pip)
+* [大眼瘦脸](KSYKiwiface)
 
 ### 5. 开发合作
 任何企业、个人都可以参与，提供的SDK付费、免费都可以。不限于以下的合作场景：
@@ -50,13 +51,14 @@
 
 ### 6.大事记
 
-1. 2016.10.20，基于Replaykit(iOS10+)的[游戏录屏](KSYReplayKit)代码开放 
+1. 2016年10月20日，基于Replaykit(iOS10+)的[游戏录屏](KSYReplayKit)代码开放 
 1. 2016年10月28日，支持[Faceunity动态贴纸方案](FaceUnitySDK)；
 1. 2016年10月28日，支持[涂图SDK美颜方案](TuSDK)；
 1. 2016年12月2日，支持[商汤科技动态贴纸方案](SenseTime);
 1. 2016年12月5日，基于[声网连麦方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/agora_v1.0.0)上线；
 1. 2017年5月18日，基于xindawn的[Airplay任意录屏方案(iOS 7.0+)](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
 1. 2017年7月1日，基于金山云自研的[Airplay手游录屏方案](https://github.com/ksvc/KSYAirStreamer_iOS/releases)上线；
+1. 2017年8月4日，[开为科技大眼瘦脸](KSYKiwiface)直播上线；
 
 ### 7. 反馈与建议
 #### 7.1 反馈模板  
