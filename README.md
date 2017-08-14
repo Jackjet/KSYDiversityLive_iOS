@@ -59,6 +59,7 @@
 1. 2017年5月18日，基于xindawn的[Airplay任意录屏方案(iOS 7.0+)](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
 1. 2017年7月1日，基于金山云自研的[Airplay手游录屏方案](https://github.com/ksvc/KSYAirStreamer_iOS/releases)上线；
 1. 2017年8月4日，[开为科技大眼瘦脸](KSYKiwiface)直播上线；
+1. 2017年8月11日，[美摄背景替换](KSYNVSDK)直播上线；
 
 ### 7. 反馈与建议
 #### 7.1 反馈模板  
