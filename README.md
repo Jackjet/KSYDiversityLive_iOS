@@ -37,6 +37,7 @@
 * 多种美颜：[涂图美颜](TuSDK)
 * [画中画](https://github.com/ksvc/KSYLive_iOS/wiki/pip)
 * [大眼瘦脸](KSYKiwiface)
+* [背景替换](KSYNVSDK)
 
 ### 5. 开发合作
 任何企业、个人都可以参与，提供的SDK付费、免费都可以。不限于以下的合作场景：
