@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		051770461F3DA3D1002060C9 /* KSYNVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 051770431F3DA3D1002060C9 /* KSYNVCapture.m */; };
 		051770471F3DA3D1002060C9 /* KSYNVGPUStreamerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 051770451F3DA3D1002060C9 /* KSYNVGPUStreamerKit.m */; };
+		051770601F3DFF55002060C9 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0517705F1F3DFF55002060C9 /* libc++.tbd */; };
 		05630D6C1F39F45200CBA6EE /* 8FB5A4C7-BAFC-4FCD-9994-F496A78F47C3.capturescene in Resources */ = {isa = PBXBuildFile; fileRef = 05B553621F39DE3D00C08AAB /* 8FB5A4C7-BAFC-4FCD-9994-F496A78F47C3.capturescene */; };
 		05630D6D1F39F45500CBA6EE /* 897F4258-74C0-4F89-884E-3E6C07E3EE0E.capturescene in Resources */ = {isa = PBXBuildFile; fileRef = 05B553631F39DE3D00C08AAB /* 897F4258-74C0-4F89-884E-3E6C07E3EE0E.capturescene */; };
 		05630D701F3B134000CBA6EE /* Vc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05630D6E1F3B134000CBA6EE /* Vc.storyboard */; };
@@ -43,6 +44,7 @@
 		051770431F3DA3D1002060C9 /* KSYNVCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNVCapture.m; sourceTree = "<group>"; };
 		051770441F3DA3D1002060C9 /* KSYNVGPUStreamerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYNVGPUStreamerKit.h; sourceTree = "<group>"; };
 		051770451F3DA3D1002060C9 /* KSYNVGPUStreamerKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNVGPUStreamerKit.m; sourceTree = "<group>"; };
+		0517705F1F3DFF55002060C9 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		05630D6F1F3B134000CBA6EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Vc.storyboard; sourceTree = "<group>"; };
 		0599D3831F347203009A3A80 /* libNvStreamingSdkCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkCore.a; path = lib/ios/libNvStreamingSdkCore.a; sourceTree = "<group>"; };
 		0599D3841F347203009A3A80 /* libNvStreamingSdkDeps.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNvStreamingSdkDeps.a; path = lib/ios/libNvStreamingSdkDeps.a; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051770601F3DFF55002060C9 /* libc++.tbd in Frameworks */,
 				E13A5F0F1F3087CD00B06AAA /* AssetsLibrary.framework in Frameworks */,
 				E13A5F0D1F3087C400B06AAA /* MobileCoreServices.framework in Frameworks */,
 				E13A5F0B1F3087BA00B06AAA /* AVFoundation.framework in Frameworks */,
@@ -155,6 +158,7 @@
 		0630A73D499A076158C5CF66 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0517705F1F3DFF55002060C9 /* libc++.tbd */,
 				0599D3831F347203009A3A80 /* libNvStreamingSdkCore.a */,
 				0599D3841F347203009A3A80 /* libNvStreamingSdkDeps.a */,
 				E13A5F0E1F3087CD00B06AAA /* AssetsLibrary.framework */,
