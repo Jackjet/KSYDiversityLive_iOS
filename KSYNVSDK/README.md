@@ -30,7 +30,7 @@ pod 'libksygpulive/libksygpulive'
 
 2. 配置KSYStreamerBase的一些主要参数，添加推流按钮来开启和关闭推流.
 
-3. 添加美摄视频采集和背景替换类KSYNVCaptureScenceKit，运行过程中提供对视频的采集和背景替换.
+3. 添加美摄视频采集和背景替换类KSYNVCapture，运行过程中提供对视频的采集和背景替换.
 
 4. 处理后的视频数据通过didVideoFrameReceived函数回调出来，推流视频在这个函数里面完成
 
