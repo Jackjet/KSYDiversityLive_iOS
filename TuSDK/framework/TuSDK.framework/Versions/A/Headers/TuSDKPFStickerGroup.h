@@ -44,9 +44,19 @@
 @property (nonatomic, copy) NSString *name;
 
 /**
+ * 贴纸包英文名称
+ */
+@property (nonatomic, copy) NSString *name_en;
+
+/**
+ * 贴纸包名称 会根据当前语言判断
+ */
+@property (nonatomic, copy) NSString *name_language;
+
+/**
  * 预览视图文件名
  */
-@property (nonatomic, copy) NSString *preivewName;
+@property (nonatomic, copy) NSString *previewName;
 
 /**
  * 贴纸列表
@@ -78,4 +88,12 @@
  *  @return 贴纸数据
  */
 - (TuSDKPFSticker *)stickerWithId:(uint64_t)stickerId;
+
+/**
+ 动态贴纸是否依赖人脸特征
+
+ @return
+ */
+- (BOOL)requireFaceFeature;
+
 @end

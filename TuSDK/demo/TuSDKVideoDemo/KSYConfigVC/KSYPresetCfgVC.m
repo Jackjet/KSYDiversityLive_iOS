@@ -9,25 +9,7 @@
 
 #import "KSYPresetCfgVC.h"
 #import "KSYUIView.h"
-#import "LiveVideoController.h"
-
-
-#ifdef KSYSTREAMER_DEMO
-@interface KSYSimpleStreamerVC : UIViewController
-@end
-@interface KSYGPUStreamerKitVC : UIViewController
-@end
-@interface imageVC : UIViewController
-@end
-@interface movieWriterVC : UIViewController
-@end
-@interface KSYSimKitVC : UIViewController
-@end
-@interface captureVC : UIViewController
-@end
-@interface gpuimageVC : UIViewController
-@end
-#endif
+#import "LiveStreamingViewController.h"
 
 @interface KSYPresetCfgVC () {
 }
@@ -93,7 +75,7 @@
 - (IBAction)btnFunc:(id)sender {
     UIViewController *vc = nil;
     if ( sender == _cfgView.btn0) { // kit demo
-        LiveVideoController *vc = [LiveVideoController new];
+        LiveStreamingViewController *vc = [LiveStreamingViewController new];
         vc.cfgview = self.cfgView;
         [self presentViewController:vc animated:YES completion:nil];
     }

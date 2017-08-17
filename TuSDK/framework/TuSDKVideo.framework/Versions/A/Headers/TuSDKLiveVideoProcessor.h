@@ -6,7 +6,6 @@
 //  Copyright © 2016 TuSDK. All rights reserved.
 //
 
-#import "TuSDKVideoProcessorBase.h"
 #import "TuSDKVideoCameraBase.h"
 #import "TuSDKVideoImport.h"
 
@@ -55,7 +54,7 @@
 /**
  *  视频直播实时处理，并支持显示预览
  */
-@interface TuSDKLiveVideoProcessor : TuSDKVideoProcessorBase<TuSDKVideoCameraInterface>
+@interface TuSDKLiveVideoProcessor : TuSDKFilterProcessorBase<TuSDKVideoCameraInterface>
 {
     @protected
     

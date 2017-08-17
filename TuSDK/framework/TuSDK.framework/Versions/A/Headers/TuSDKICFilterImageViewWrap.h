@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TuSDKFilterWrap.h"
 #import "TuSDKGPUSmartView.h"
+#import "TuSDKICGPUImageView.h"
 
 #pragma mark - TuSDKICFilterImageViewInterface
 /**
@@ -58,4 +59,20 @@
  *  GPU智能视图
  */
 @property (nonatomic, readonly) TuSDKGPUSmartView *view;
+@end
+
+#pragma mark - TuSDKICFilterMovieViewWrap
+/**
+ *  视频显示视图包装
+ */
+@interface TuSDKICFilterMovieViewWrap : UIView
+/**
+ *  GPU视图
+ */
+@property (nonatomic, readonly) TuSDKICGPUImageView *view;
+
+/**
+ *  裁剪区域范围，均以比例表示：{{offsetX/allWidth,offsetY/allHeight}，{sizeWidth/allWidth,sizeHeight/allHeight}}
+ */
+@property (nonatomic, assign) CGRect cropRect;
 @end

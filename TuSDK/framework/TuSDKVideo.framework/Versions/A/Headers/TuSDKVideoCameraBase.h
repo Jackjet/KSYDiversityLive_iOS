@@ -25,14 +25,25 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
      */
     lsqFormatTypeBGRA,
     /**
-     *  输出 YUV 格式 (kCVPixelFormatType_420YpCbCr8BiPlanarFullRange，即 NV21， Two Plane)
+     *  输出 YUV 格式 (kCVPixelFormatType_420YpCbCr8BiPlanarFullRange，即 NV12，YYYYYYYY UVUV)
      */
     lsqFormatTypeYUV420F,
+    /**
+     *  输出 YUV 格式 (NV21， YYYYYYYY VUVU) 注：无法用于预览，仅供推流时使用
+     */
+    lsqFormatTypeNV21,
     /**
      *  输出基于 BGRA 格式的原始数据
      */
     lsqFormatTypeRawData,
 };
+
+#pragma mark - GPUImageVideoCamera (lsqExt)
+
+@interface GPUImageVideoCamera (lsqExt)
+
+- (void)updateTargetsForVideoCameraUsingCacheTextureAtWidth:(int)bufferWidth height:(int)bufferHeight time:(CMTime)currentTime;
+@end
 
 #pragma mark - TuSDKVideoCameraBase
 
@@ -44,12 +55,23 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
     @protected
     // 输出尺寸
     CGSize _outputSize;
+    
     // 视频视图
     TuSDKICFilterVideoViewWrap *_cameraView;
     // 相机聚焦触摸视图
     UIView<TuSDKVideoCameraExtendViewInterface> *_focusTouchView;
     // 相机辅助视图
     TuSDKICGuideRegionView *_guideView;
+    
+    // 重力感应器
+    TuSDKTSMotion *_motion;
+    
+    // process benchmark
+    BOOL _enableProcessBenchmark;
+    
+    NSUInteger _numberOfFramesProcessed;
+    CFAbsoluteTime _lastFrameTime;
+    CFAbsoluteTime _totalFrameTimeDuringProcess;
 }
 
 /**
@@ -83,7 +105,7 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
 @property (nonatomic) BOOL enableFilterConfig;
 
 /**
- *  禁止聚焦功能 (默认: NO)
+ *  禁止触摸聚焦功能 (默认: YES)
  */
 @property (nonatomic) BOOL disableTapFocus;
 
@@ -137,14 +159,55 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
 @property (nonatomic) BOOL disableMirrorFrontFacing;
 
 /**
- *  是否开启脸部追踪 (默认: YES)
+ *  是否开启脸部追踪聚焦 (默认: YES)
  */
 @property (nonatomic) BOOL enableFaceDetection;
 
 /**
- *  是否开启智能美颜和智能贴纸 (默认: 直播相机 NO)
+ *  是否开启动态贴纸 (默认: NO)
  */
-@property (nonatomic) BOOL enableFaceAutoBeauty;
+@property (nonatomic) BOOL enableLiveSticker;
+
+/**
+ *  是否开启焦距调节 (默认关闭)
+ */
+@property (nonatomic, assign) BOOL enableFocalDistance;
+
+/**
+ *  相机显示焦距 (默认为 1，最大不可超过硬件最大值，当小于 1 时，取 1)
+ */
+@property (nonatomic, assign) CGFloat focalDistanceScale;
+
+/**
+ *  相机支持的最大值 (只读属性)
+ */
+@property (nonatomic, readonly, assign) CGFloat supportMaxFocalDistanceScale;
+
+/**
+ *  是否开启性能测试
+ */
+@property (nonatomic) BOOL enableProcessBenchmark;
+
+#pragma mark - waterMark
+/**
+ 设置水印图片，最大边长不宜超过 500
+ */
+@property (nonatomic, retain) UIImage *waterMarkImage;
+
+/**
+ 水印位置，默认 lsqWaterMarkBottomRight
+ */
+@property (nonatomic) lsqWaterMarkPosition waterMarkPosition;
+
+/**
+ *  是否开启美颜效果 (默认: NO)
+ */
+@property (nonatomic,assign) BOOL enableBeauty;
+
+/**
+ *  设置美颜强度 (范围：0~1 数值越大越平滑 默认：0.6)
+ */
+@property (nonatomic,assign) CGFloat beautyLevel;
 
 /**
  *  初始化
@@ -203,21 +266,18 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
 - (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode;
 
 /**
- *  设置曝光模式
- *
- *  @param focusMode 曝光模式
- *  @param point     曝光坐标
- *
- *  @return 是否支持曝光模式
- */
-- (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode point:(CGPoint)point;
-
-/**
  *  当前聚焦状态
  *
  *  @param isFocusing 是否正在聚焦
  */
 - (void)onAdjustingFocus:(BOOL)isFocusing;
+
+/**
+ *  通知相机状态发生改变
+ *
+ *  @param newState 新的状态
+ */
+- (void)notifyCameraStateChanged:(lsqCameraState)newState;
 
 /**
  *  相机状态发生改变
@@ -231,7 +291,19 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
  */
 - (void)updateOutputFilter;
 
-#pragma mark - smart sticker
+/**
+ *  标记需要重新计算裁剪的画面大小
+ */
+- (void)markRecalculateCaptureSize;
+
+/**
+ 通知拍照结果
+ 
+ @param result 拍摄照片
+ */
+- (void)notifyCaptureResult:(UIImage *)result;
+
+#pragma mark - live sticker
 
 /**
  *  显示一组动态贴纸。当显示一组贴纸时，会清除画布上的其它贴纸
@@ -249,31 +321,15 @@ typedef NS_ENUM(NSInteger, lsqFrameFormatType)
 - (BOOL)isGroupStickerUsed:(TuSDKPFStickerGroup *)groupSticker;
 
 /**
- *  显示动态贴纸
- *
- *  @param liveSticker 动态贴纸对象
- */
-- (void)addLiveSticker:(TuSDKPFSticker *)liveSticker;
-
-/**
- *  动态贴纸是否已在使用
- *
- *  @param liveSticker 动态贴纸组对象
- *  @return 　是否使用
- */
-- (BOOL)isLiveStickerUsed:(TuSDKPFSticker *)liveSticker;
-
-/**
- *  从相机移除动态贴纸
- *
- *  @param liveSticker 动态贴纸对象
- */
-- (void)removeLiveSticker:(TuSDKPFSticker *)liveSticker;
-
-/**
  *  清除动态贴纸
  */
 - (void)removeAllLiveSticker;
+
+#pragma mark - benchmark
+/**
+ *  打印性能日志
+ */
+- (void)runProcessBenchmark;
 
 #pragma mark - destory
 

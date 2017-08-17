@@ -39,7 +39,7 @@
 /**
  *  贴纸元件视图委托
  */
-@property (nonatomic, assign) id<TuSDKPFStickerItemViewDelegate> delegate;
+@property (nonatomic, weak) id<TuSDKPFStickerItemViewDelegate> delegate;
 
 /**
  *  贴纸数据对象
@@ -100,7 +100,7 @@
 /**
  *  贴纸元件视图委托
  */
-@property (nonatomic, assign) id<TuSDKPFStickerItemViewDelegate> delegate;
+@property (nonatomic, weak) id<TuSDKPFStickerItemViewDelegate> delegate;
 
 /**
  *  最小缩小比例(默认: 0.5f <= mMinScale <= 1)
@@ -166,7 +166,7 @@
 /**
  *  贴纸视图委托
  */
-@property (nonatomic, assign) id<TuSDKPFStickerViewDelegate> delegate;
+@property (nonatomic, weak) id<TuSDKPFStickerViewDelegate> delegate;
 
 /**
  *  当前已使用贴纸总数
@@ -179,6 +179,14 @@
  *  @param sticker 贴纸元素
  */
 - (void)appenSticker:(TuSDKPFSticker *)sticker;
+
+/**
+ *  添加贴纸
+ *
+ *  @param stickerImage 贴纸图片 (PNG格式)
+ */
+- (void)appendStickerImage:(UIImage *) stickerImage;
+
 
 /**
  *  获取贴纸处理结果

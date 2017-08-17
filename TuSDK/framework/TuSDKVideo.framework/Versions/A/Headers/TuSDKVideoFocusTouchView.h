@@ -44,16 +44,16 @@
 @property (nonatomic) BOOL disableTapFocus;
 
 /**
- *  是否开启脸部特征检测 (智能美颜 | 动态贴纸 都需要开启该选项)
- */
-@property (nonatomic) BOOL enableFaceFeatureDetection;
-
-/**
  *  通知选取范围视图
  *
  *  @param point 聚焦点
  */
 - (void)notifyRangeViewWithPoint:(CGPoint)point;
 
+#ifdef ENABLE_FACE_LIB
+- (void) onFaceAligmented:(NSArray<TuSDKFaceAligment *> *)aligments
+                     size:(CGSize)size
+                focusFace:(BOOL)focusFace;
+#endif
 @end
 

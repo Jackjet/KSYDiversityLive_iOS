@@ -47,10 +47,10 @@
 /**
  *  更新脸部信息
  *
- *  @param points    特征点数据
- *  @param imageRect 视图尺寸
+ *  @param points      特征点数据
+ *  @param deviceAngle 设备角度
  */
-- (void)updateFaceFeatures:(NSArray<NSValue *> *)points imageRect:(CGRect)imageRect;
+- (void)updateFaceFeatures:(NSArray<NSValue *> *)points angle:(CGFloat)deviceAngle;
 
 @end
 
@@ -85,5 +85,10 @@
  *  终止录制
  */
 - (void)cancelRecording;
+
+/**
+ *  完成视频录制，且在完成后，执行block内容
+ */
+- (void)publicFinishRecordingWithCompletionHandler:(void (^)(void))handler;
 
 @end

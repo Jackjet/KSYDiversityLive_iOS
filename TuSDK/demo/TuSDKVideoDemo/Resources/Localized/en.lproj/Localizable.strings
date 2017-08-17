@@ -6,22 +6,23 @@
   Copyright © 2016 tusdk.com. All rights reserved.
 */
 
-"app_name" = "TuSDK Video Demo";
+"app_name" = "TuSDK Live Engine Demo";
 
 "live_camera_sample" = "Live camera sample";
 "live_processor_sample" = "Image process engine";
 "record_camera_sample" = "Record camera sample";
-"record_camera_square_sample" = "Record camera sample (Square)";
-"record_camera_circle_sample" = "Record camera sample (Circle)";
+"live_camera_sampleTest" = "Live camera sample test";
+"live_player_sampleTest" = "Live player sample test";
 
 "beauty_on" = "Beauty Mode On";
 "beauty_off" = "Beauty Mode Off";
 
+"lsq_filter_Normal" = "Normal";
 "lsq_filter_VideoFair" = "Nature";
 "lsq_filter_VideoYoungGirl" = "Pink";
 "lsq_filter_VideoWhiteSkin" = "WhiteSkin";
 "lsq_filter_VideoFaceu01" = "Faceu 01";
-"lsq_filter_VideoHuaJiao" = "HuaJiao";
+"lsq_filter_VideoHuaJiao" = "Elegant";
 "lsq_filter_VideoJelly" = "Jelly";
 
 "lsq_reset" = "Reset";
@@ -32,3 +33,28 @@
 "lsq_filter_set_distanceFactor" = "Radius";
 "lsq_filter_set_eyeSize" = "Eye";
 "lsq_filter_set_chinSize" = "Chin";
+
+//new filter
+"lsq_filter_Fair" = "Fair";
+"lsq_filter_Pink" = "Pink";
+"lsq_filter_Brilliantly" = "Brilliantly";
+"lsq_filter_Naturally" = "Naturally";
+"lsq_filter_Paul" = "Paul";
+"lsq_filter_Movie" = "Movie";
+"lsq_filter_Coral" = "Coral";
+"lsq_filter_Mint" = "Mint";
+"lsq_filter_Vivid" = "Vivid";
+"lsq_filter_Honey" = "Honey";
+
+// status
+"stream_status_connecting" = "Connecting server";
+"stream_status_started" = "Live show started";
+"stream_status_stop" = "Live show stopped";
+"stream_status_fps" = "FPS: %@";
+"stream_status_cache" = "Buffer...";
+"stream_status_error" = "Got error，check network status please";
+"stream_status_bad" = "The current network status is bad, live broadcast has stopped";
+
+"title_label_text" = "Demo";
+"liveplaying_label_text" = "PlayingURL";
+"streaming_label_text" = "StreamingURL";

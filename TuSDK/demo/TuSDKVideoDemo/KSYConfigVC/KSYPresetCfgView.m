@@ -38,7 +38,7 @@
     
     CGRect screenRect = [[UIScreen mainScreen]bounds];
     CGFloat ratio = screenRect.size.width / screenRect.size.height;
-    _lblResolutionUI = [self addLable:@"采集分辨率"];
+    _lblResolutionUI = [self addLable:@"预览分辨率"];
     _lblStreamResoUI = [self addLable:@"推流分辨率"];
     
     _resolutionUI = [self addSegCtrlWithItems:@[@"360p",@"540p",@"720p"]];

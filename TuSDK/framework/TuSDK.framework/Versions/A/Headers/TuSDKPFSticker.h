@@ -17,7 +17,7 @@
 /**
  *  智能贴纸类型
  */
-typedef NS_ENUM(NSUInteger, lsqStickerPostionType)
+typedef NS_ENUM(NSUInteger, lsqStickerPositionType)
 {
     /**
      * 眉毛
@@ -59,8 +59,44 @@ typedef NS_ENUM(NSUInteger, lsqStickerPostionType)
     /**
      * 全屏显示
      */
-    lsqStickePosScreen = 100
+    lsqStickerPosFullScreen = 100,
     
+    /**
+     * 左上角
+     */
+    lsqStickerPosScreenLeftTop = 101,
+    /**
+     * 右上角
+     */
+    lsqStickerPosScreenRightTop = 102,
+    /**
+     * 左下角
+     */
+    lsqStickerPosScreenLeftBottom = 103,
+    /**
+     * 右下角
+     */
+    lsqStickerPosScreenRightBottom = 104,
+    /**
+     * 中心
+     */
+    lsqStickerPosScreenCenter = 105,
+    /**
+     * 右对齐居中
+     */
+    lsqStickerPosScreenRightCenter = 106,
+    /**
+     * 左对齐居中
+     */
+    lsqStickerPosScreenLeftCenter = 107,
+    /**
+     * 顶部对齐居中
+     */
+    lsqStickerPosScreenTopCenter = 108,
+    /**
+     * 右下角对齐居中
+     */
+    lsqStickerPosScreenBottomCenter = 109,
 };
 
 /**
@@ -82,6 +118,25 @@ typedef NS_ENUM(NSInteger, lsqStickerLoopMode)
     lsqStickerLoopRandom = 3
 };
 
+/**
+ *  渲染模式
+ */
+typedef NS_ENUM(NSInteger, lsqStickerRenderType)
+{
+    /**
+     * Alpha 混合
+     */
+    lsqStickerRenderAlphaBlend = 1,
+    /**
+     * 正片叠底
+     */
+    lsqStickerRenderBlendMultiply = 2,
+    /**
+     * Light
+     */
+    lsqStickerRenderLightGlare = 3
+};
+
 
 @interface TuSDKStickerPositionInfo : NSObject
 
@@ -91,6 +146,11 @@ typedef NS_ENUM(NSInteger, lsqStickerLoopMode)
 @property (nonatomic, readonly) CGSize modelSize;
 
 /**
+ 设计屏幕尺寸
+ */
+@property (nonatomic, readonly) CGSize designScreenSize;
+
+/**
  *  贴纸模型类型
  */
 @property (nonatomic, readonly) NSUInteger modelType;
@@ -98,7 +158,12 @@ typedef NS_ENUM(NSInteger, lsqStickerLoopMode)
 /**
  *  贴纸定位类型
  */
-@property (nonatomic, readonly) lsqStickerPostionType posType;
+@property (nonatomic, readonly) lsqStickerPositionType posType;
+
+/**
+ *  贴纸渲染类型
+ */
+@property (nonatomic, readonly) lsqStickerRenderType renderType;
 
 /**
  *  宽高比
@@ -136,6 +201,11 @@ typedef NS_ENUM(NSInteger, lsqStickerLoopMode)
 @property (nonatomic, readonly) lsqStickerLoopMode loopMode;
 
 /**
+ *  动画循环起始帧索
+ */
+@property (nonatomic, readonly) NSUInteger loopStartIndex;
+
+/**
  *  素材列表
  */
 @property (nonatomic) NSArray *resourceList;
@@ -147,6 +217,12 @@ typedef NS_ENUM(NSInteger, lsqStickerLoopMode)
  */
 - (instancetype)initWithJson:(NSDictionary *)json;
 
+/**
+ * 是否支持动画
+ *
+ * @return
+ */
+- (BOOL)hasAnimationSupported;
 @end
 
 #pragma mark - TuSDKPFSticker
@@ -167,7 +243,7 @@ typedef NS_ENUM(NSInteger, lsqStickerType)
     /**
      * 智能贴纸
      */
-    lsqStickerFace = 3,
+    lsqStickerDynamic = 3,
 };
 
 /**
@@ -197,7 +273,7 @@ typedef NS_ENUM(NSInteger, lsqStickerType)
 /**
  * 预览视图文件名
  */
-@property (nonatomic, copy) NSString *preivewName;
+@property (nonatomic, copy) NSString *previewName;
 
 /**
  * 贴纸文件名
@@ -258,4 +334,11 @@ typedef NS_ENUM(NSInteger, lsqStickerType)
  *  @return 贴纸文字
  */
 - (TuSDKPFStickerText *)stickerTextWithId:(uint64_t)textId;
+
+/**
+ 动态贴纸是否依赖人脸特征
+ 
+ @return
+ */
+- (BOOL)requireFaceFeature;
 @end

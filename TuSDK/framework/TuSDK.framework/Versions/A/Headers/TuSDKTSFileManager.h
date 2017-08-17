@@ -205,5 +205,15 @@
  *
  *  @param file 文件的MD5
  */
-+ md5File:(NSString *)file;
++ (NSString *)md5File:(NSString *)file;
+
+
+/**
+ 获取手机可用空间（单位：字节）
+ 
+ @return 当前可用空间
+ */
++ (float)fileSystemFreeSize;
+
+
 @end

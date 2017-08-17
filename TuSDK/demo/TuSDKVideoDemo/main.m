@@ -1,10 +1,11 @@
 //
 //  main.m
-//  TuSDKVideoDemo
+//  TuSDKLiveEngineDemo
 //
-//  Created by Yanlin on 3/5/16.
-//  Copyright © 2016 TuSDK. All rights reserved.
+//  Created by GuangSheng on 16/11/22.
+//  Copyright © 2016年 TuSDK. All rights reserved.
 //
+
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"

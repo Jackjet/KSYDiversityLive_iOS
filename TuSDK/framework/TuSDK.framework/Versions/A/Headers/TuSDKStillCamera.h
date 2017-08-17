@@ -22,7 +22,7 @@
 /**
  *  相机事件委托
  */
-@property (nonatomic, assign) id<TuSDKStillCameraDelegate> captureDelegate;
+@property (nonatomic, weak) id<TuSDKStillCameraDelegate> captureDelegate;
 
 /**
  *  相机状态
@@ -100,6 +100,21 @@
 @property (nonatomic) BOOL enableFaceDetection;
 
 /**
+ *  是否开启焦距调节 (默认关闭)
+ */
+@property (nonatomic, assign) BOOL enableFocalDistance;
+
+/**
+ *  相机显示焦距 (默认为 1,最大不可超过硬件最大值)
+ */
+@property (nonatomic, assign) CGFloat focalDistanceScale;
+
+/**
+ *  相机支持的最大值 (只读属性)
+ */
+@property (nonatomic, readonly, assign) CGFloat supportMaxFocalDistanceScale;
+
+/**
  *  初始化相机
  *
  *  @param sessionPreset  相机分辨率类型
@@ -139,16 +154,6 @@
  *  @return 是否支持曝光模式
  */
 - (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode;
-
-/**
- *  设置曝光模式
- *
- *  @param focusMode 曝光模式
- *  @param point     曝光坐标
- *
- *  @return 是否支持曝光模式
- */
-- (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode point:(CGPoint)point;
 
 /**
  *  当前聚焦状态

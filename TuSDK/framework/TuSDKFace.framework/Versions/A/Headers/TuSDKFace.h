@@ -18,6 +18,12 @@
 @property (nonatomic) CGRect rect;
 /** 对齐信息 */
 @property (nonatomic, retain) NSArray<NSValue *> *marks;
+
+@property (nonatomic) CGFloat yaw;
+
+@property (nonatomic) CGFloat pitch;
+
+@property (nonatomic) CGFloat roll;
 @end
 
 
@@ -26,25 +32,49 @@
  *  人脸检测
  */
 @interface TuSDKFace : NSObject
+
+// 人脸检测
++ (TuSDKFace *)shared;
+
 /**
  *  检测人脸并识别
  *
- *  @param image 输入图片 输出图片
+ *  @param image 输入图片
  *
  *  @return 返回查找到的人脸
  */
 + (NSArray<TuSDKFaceAligment *> *)markFaceWithImage:(UIImage *)image;
 
 /**
- *  对检测到的人脸进行识别
+ *  根据人脸特征点获取三维角度
  *
- *  @param sampleBuffer CMSampleBufferRef
- *  @param rotation     旋转角度
- *  @param angle        设备旋转角度
+ *  @param faceAligment 人脸特征
+ *  @param previewSize  视图大小
  *
- *  @return 返回查找到的人脸
+ *  @return 返回三维角度
  */
-+ (NSArray<TuSDKFaceAligment *> *)markFaceWithSampleBuffer:(CMSampleBufferRef)sampleBuffer
-                                                  rotation:(UIImageOrientation)rotation
-                                                     angle:(float)angle;
++ (NSDictionary *)calcFaceAngle:(TuSDKFaceAligment *)faceAligment
+                           previewSize:(CGSize)previewSize;
+
+
+/**
+ 对相机采集的帧数据检测人脸并识别
+
+ @param buffer 帧数据(YUV/BGRA)
+ @param width 宽度
+ @param height 高度
+ @param ori 朝向
+ @param angle 设备旋转角度
+ @param flip 是否水平翻转
+ 
+ @return 返回查找到的人脸
+ */
++ (NSArray<TuSDKFaceAligment *> *)markFaceWithBuffer:(uint8_t *)buffer
+                                               width:(int)width
+                                              height:(int)height
+                                              stride:(int)stride
+                                            channels:(int)channels
+                                                 ori:(float)ori
+                                               angle:(float)angle
+                                                flip:(BOOL)flip;
 @end

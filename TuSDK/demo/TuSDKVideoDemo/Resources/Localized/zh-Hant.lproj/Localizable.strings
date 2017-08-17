@@ -6,22 +6,24 @@
   Copyright © 2016 tusdk.com. All rights reserved.
 */
 
-"app_name" = "塗圖 TuSDK Video Demo";
+"app_name" = "塗圖 TuSDK Live Engine Demo";
 
 "live_camera_sample" = "直播相機示例";
 "live_processor_sample" = "圖像引擎示例";
 "record_camera_sample" = "視頻錄製示例";
-"record_camera_square_sample" = "視頻錄製示例 - 正方畫幅";
-"record_camera_circle_sample" = "視頻錄製示例 - 圓畫幅";
+"live_camera_sampleTest" = "直播相機測試";
+"live_player_sampleTest" = "播放器測試";
+
 
 "beauty_on" = "美顏已開啟";
 "beauty_off" = "美顏已關閉";
 
+"lsq_filter_Normal" = "無效果";
 "lsq_filter_VideoFair" = "自然";
 "lsq_filter_VideoYoungGirl" = "粉嫩";
 "lsq_filter_VideoWhiteSkin" = "美白";
 "lsq_filter_VideoFaceu01" = "Faceu 01";
-"lsq_filter_VideoHuaJiao" = "仿花椒";
+"lsq_filter_VideoHuaJiao" = "淡雅";
 "lsq_filter_VideoJelly" = "果凍";
 
 "lsq_reset" = "重置";
@@ -32,3 +34,28 @@
 "lsq_filter_set_distanceFactor" = "半徑";
 "lsq_filter_set_eyeSize" = "大眼";
 "lsq_filter_set_chinSize" = "瘦臉";
+
+//new filter
+"lsq_filter_Fair" = "白皙";
+"lsq_filter_Pink" = "粉嫩";
+"lsq_filter_Brilliantly" = "明亮";
+"lsq_filter_Naturally" = "自然";
+"lsq_filter_Paul" = "阿寶";
+"lsq_filter_Movie" = "電影";
+"lsq_filter_Coral" = "珊瑚粉";
+"lsq_filter_Mint" = "薄荷綠";
+"lsq_filter_Vivid" = "小清新";
+"lsq_filter_Honey" = "蜜糖";
+
+// status
+"stream_status_connecting" = "正在鏈接服务器";
+"stream_status_started" = "成功連上服務器，開始直播";
+"stream_status_stop" = "直播已停止";
+"stream_status_fps" = "當前FPS切換為 %@";
+"stream_status_cache" = "緩衝中...";
+"stream_status_error" = "直播出錯，請檢查網絡連接狀態";
+"stream_status_bad" = "当前网络状况不好，直播已停止";
+
+"title_label_text" = "進入 Demo";
+"liveplaying_label_text" = "觀看地址";
+"streaming_label_text" = "推流地址";

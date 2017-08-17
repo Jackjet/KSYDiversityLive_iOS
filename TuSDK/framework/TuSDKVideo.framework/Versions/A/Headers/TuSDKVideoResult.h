@@ -10,6 +10,18 @@
 #import "TuSDKVideoImport.h"
 
 /**
+ 导出的视频文件类型
+ */
+typedef NS_ENUM(NSInteger,lsqFileType)
+{
+    /** MOV */
+    lsqFileTypeQuickTimeMovie,
+    
+    /** MP4 */
+    lsqFileTypeMPEG4
+};
+
+/**
  *  视频结果
  */
 @interface TuSDKVideoResult : NSObject
@@ -27,7 +39,7 @@
 /**
  *  视频时长
  */
-@property (nonatomic) NSUInteger duration;
+@property (nonatomic, assign) CGFloat duration;
 
 /**
  *  SDK处理结果

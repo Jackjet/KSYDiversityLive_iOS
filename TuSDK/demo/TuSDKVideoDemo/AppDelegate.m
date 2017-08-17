@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "TuSDKFramework.h"
-#import "MainViewController.h"
 #import "KSYPresetCfgVC.h"
 
 @interface AppDelegate ()
@@ -27,7 +26,8 @@
      *
      *  @param appkey 应用秘钥 (请前往 http://tusdk.com 申请秘钥)
      */
-    [TuSDK initSdkWithAppKey:@"5e501981b069355a-04-ewdjn1"];
+    //[TuSDK initSdkWithAppKey:@"5e501981b069355a-04-ewdjn1"];
+    [TuSDK initSdkWithAppKey:@"1f330d5d12fb5707-04-ewdjn1"];
     
     /**
      *  指定开发模式,需要与lsq_tusdk_configs.json中masters.key匹配， 如果找不到devType将默认读取master字段
