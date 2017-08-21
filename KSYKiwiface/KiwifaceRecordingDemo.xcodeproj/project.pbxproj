@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0517301F1F46D5D7007B16D8 /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 051730161F46D5D7007B16D8 /* KSYNameSlider.m */; };
+		051730201F46D5D7007B16D8 /* KSYPresetCfgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 051730181F46D5D7007B16D8 /* KSYPresetCfgVC.m */; };
+		051730211F46D5D7007B16D8 /* KSYPresetCfgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517301A1F46D5D7007B16D8 /* KSYPresetCfgView.m */; };
+		051730221F46D5D7007B16D8 /* KSYUIVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517301C1F46D5D7007B16D8 /* KSYUIVC.m */; };
+		051730231F46D5D7007B16D8 /* KSYUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517301E1F46D5D7007B16D8 /* KSYUIView.m */; };
 		0599D1151F2F7484009A3A80 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0599D1141F2F7484009A3A80 /* libc++.tbd */; };
 		05C421B91F2F1285008AC3CA /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C421B81F2F1285008AC3CA /* opencv2.framework */; };
 		1688351A1E45BE300016210E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 168835191E45BE300016210E /* main.m */; };
 		1688351D1E45BE300016210E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688351C1E45BE300016210E /* AppDelegate.m */; };
-		168835201E45BE300016210E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1688351F1E45BE300016210E /* ViewController.m */; };
 		168835231E45BE300016210E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 168835211E45BE300016210E /* Main.storyboard */; };
 		168835251E45BE300016210E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 168835241E45BE300016210E /* Assets.xcassets */; };
 		168835281E45BE300016210E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 168835261E45BE300016210E /* LaunchScreen.storyboard */; };
@@ -207,14 +211,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051730151F46D5D7007B16D8 /* KSYNameSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYNameSlider.h; sourceTree = "<group>"; };
+		051730161F46D5D7007B16D8 /* KSYNameSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNameSlider.m; sourceTree = "<group>"; };
+		051730171F46D5D7007B16D8 /* KSYPresetCfgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgVC.h; sourceTree = "<group>"; };
+		051730181F46D5D7007B16D8 /* KSYPresetCfgVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPresetCfgVC.m; sourceTree = "<group>"; };
+		051730191F46D5D7007B16D8 /* KSYPresetCfgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgView.h; sourceTree = "<group>"; };
+		0517301A1F46D5D7007B16D8 /* KSYPresetCfgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPresetCfgView.m; sourceTree = "<group>"; };
+		0517301B1F46D5D7007B16D8 /* KSYUIVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIVC.h; sourceTree = "<group>"; };
+		0517301C1F46D5D7007B16D8 /* KSYUIVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIVC.m; sourceTree = "<group>"; };
+		0517301D1F46D5D7007B16D8 /* KSYUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYUIView.h; sourceTree = "<group>"; };
+		0517301E1F46D5D7007B16D8 /* KSYUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYUIView.m; sourceTree = "<group>"; };
 		0599D1141F2F7484009A3A80 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		05C421B81F2F1285008AC3CA /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		168835151E45BE300016210E /* KiwifaceRecordingDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiwifaceRecordingDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		168835191E45BE300016210E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1688351B1E45BE300016210E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1688351C1E45BE300016210E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1688351E1E45BE300016210E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1688351F1E45BE300016210E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		168835221E45BE300016210E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		168835241E45BE300016210E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		168835271E45BE300016210E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -482,6 +494,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051730141F46D5D7007B16D8 /* KSYConfigVC */ = {
+			isa = PBXGroup;
+			children = (
+				051730151F46D5D7007B16D8 /* KSYNameSlider.h */,
+				051730161F46D5D7007B16D8 /* KSYNameSlider.m */,
+				051730171F46D5D7007B16D8 /* KSYPresetCfgVC.h */,
+				051730181F46D5D7007B16D8 /* KSYPresetCfgVC.m */,
+				051730191F46D5D7007B16D8 /* KSYPresetCfgView.h */,
+				0517301A1F46D5D7007B16D8 /* KSYPresetCfgView.m */,
+				0517301B1F46D5D7007B16D8 /* KSYUIVC.h */,
+				0517301C1F46D5D7007B16D8 /* KSYUIVC.m */,
+				0517301D1F46D5D7007B16D8 /* KSYUIView.h */,
+				0517301E1F46D5D7007B16D8 /* KSYUIView.m */,
+			);
+			path = KSYConfigVC;
+			sourceTree = "<group>";
+		};
 		1688350C1E45BE2F0016210E = {
 			isa = PBXGroup;
 			children = (
@@ -503,11 +532,10 @@
 		168835171E45BE300016210E /* KiwifaceRecordingDemo */ = {
 			isa = PBXGroup;
 			children = (
+				051730141F46D5D7007B16D8 /* KSYConfigVC */,
 				BE9BA0A61ED2B5BF002F3DA6 /* KiwiFaceSDK */,
 				1688351B1E45BE300016210E /* AppDelegate.h */,
 				1688351C1E45BE300016210E /* AppDelegate.m */,
-				1688351E1E45BE300016210E /* ViewController.h */,
-				1688351F1E45BE300016210E /* ViewController.m */,
 				168835321E45C4070016210E /* KWVideoShowViewController.h */,
 				168835331E45C4070016210E /* KWVideoShowViewController.m */,
 				168835211E45BE300016210E /* Main.storyboard */,
@@ -1127,19 +1155,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				168835201E45BE300016210E /* ViewController.m in Sources */,
 				BE9BA5701ED2B5C1002F3DA6 /* SDWebImageManager.m in Sources */,
+				051730201F46D5D7007B16D8 /* KSYPresetCfgVC.m in Sources */,
 				BE9BA5671ED2B5C1002F3DA6 /* KWSaveData.m in Sources */,
 				1688351D1E45BE300016210E /* AppDelegate.m in Sources */,
 				BE9BA5741ED2B5C1002F3DA6 /* UIImage+MultiFormat.m in Sources */,
 				BE9BA4C11ED2B5C1002F3DA6 /* KWSDK_UI.m in Sources */,
 				BE9BA5681ED2B5C1002F3DA6 /* Reachability.m in Sources */,
+				051730231F46D5D7007B16D8 /* KSYUIView.m in Sources */,
 				BE9BA5731ED2B5C1002F3DA6 /* UIImage+GIF.m in Sources */,
 				BE9BA4F11ED2B5C1002F3DA6 /* KWStickerDownloadManager.m in Sources */,
+				051730211F46D5D7007B16D8 /* KSYPresetCfgView.m in Sources */,
 				BE9BA5711ED2B5C1002F3DA6 /* SDWebImagePrefetcher.m in Sources */,
 				BE9BA5851ED2B5C1002F3DA6 /* KWStickerCell.m in Sources */,
 				BE9BA4F21ED2B5C1002F3DA6 /* KWStickerManager.m in Sources */,
 				BE9BA57C1ED2B5C1002F3DA6 /* zip.c in Sources */,
+				051730221F46D5D7007B16D8 /* KSYUIVC.m in Sources */,
 				BE9BA5831ED2B5C1002F3DA6 /* KWDistortionCell.m in Sources */,
 				BE9BA5721ED2B5C1002F3DA6 /* UIButton+WebCache.m in Sources */,
 				BE9BA5791ED2B5C1002F3DA6 /* ioapi.c in Sources */,
@@ -1150,6 +1181,7 @@
 				BE9BA56C1ED2B5C1002F3DA6 /* SDWebImageCompat.m in Sources */,
 				1688351A1E45BE300016210E /* main.m in Sources */,
 				BE9BA56D1ED2B5C1002F3DA6 /* SDWebImageDecoder.m in Sources */,
+				0517301F1F46D5D7007B16D8 /* KSYNameSlider.m in Sources */,
 				BE9BA57D1ED2B5C1002F3DA6 /* SSZipArchive.m in Sources */,
 				BE9BA5781ED2B5C1002F3DA6 /* UIView+WebCacheOperation.m in Sources */,
 				BE9BA4C01ED2B5C1002F3DA6 /* KWSDK.m in Sources */,

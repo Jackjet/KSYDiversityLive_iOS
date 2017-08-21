@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) GPUImageStillCamera *videoCamera;
 @property (nonatomic, strong) GPUImageMovieWriter *movieWriter;
-@property (nonatomic, strong) GPUImageView *previewView;
 @property (nonatomic, strong) NSURL *movieURL;
 @property (nonatomic, strong) NSURL *exportURL;
 @property (nonatomic, strong) CALayer *watermarkLayer;
@@ -36,10 +35,9 @@
 @property (nonatomic, strong) UILabel *labRecordState;
 @property (nonatomic, strong) dispatch_queue_t sessionQueue;
 
-@property (nonatomic, readonly) KSYAUAudioCapture  *aCapDev;
-@property (nonatomic, retain)  KSYStreamerBase     *streamerBase;
-@property (nonatomic, readonly) KSYAudioMixer      *aMixer;
 // 推流地址 完整的URL
+@property (nonatomic, strong) UILabel *streamState;
+@property (nonatomic, retain) KSYGPUStreamerKit *kit;
 @property NSURL * hostURL;
 
 @end
@@ -52,6 +50,63 @@
     AVURLAsset *asset;
     
     UIButton *btnRecord;//临时申请的按钮控件指针 控制是否可用。
+}
+
+- (void)initKSYStreamerSettings
+{
+    //streamkit initialized
+    _kit = [[KSYGPUStreamerKit alloc] initWithDefaultCfg];
+    _kit.videoOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    _kit.previewDimension = [self.cfgview capResolutionSize];
+    _kit.streamDimension  = [self.cfgview strResolutionSize];
+    _kit.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA;
+    _kit.capturePixelFormat   = kCVPixelFormatType_32BGRA;
+    
+    [self setStreamCfg];
+    NSString *version = [_kit.streamerBase getKSYVersion];
+    NSLog(@"ksyun sdk version: %@", version);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(streamStateChanged) name:KSYStreamStateDidChangeNotification object:nil];
+}
+
+- (void)setStreamCfg{
+    if (_cfgview) {
+        _kit.streamerBase.videoCodec       = [_cfgview videoCodec];
+        _kit.streamerBase.videoInitBitrate = [_cfgview videoKbps]*6/10;//60%
+        _kit.streamerBase.videoMaxBitrate  = [_cfgview videoKbps];
+        _kit.streamerBase.videoMinBitrate  = 0; //
+        _kit.streamerBase.audioCodec       = [_cfgview audioCodec];
+        _kit.streamerBase.audiokBPS        = [_cfgview audioKbps];
+        _kit.streamerBase.videoFPS         = [_cfgview frameRate];
+        _kit.streamerBase.bwEstimateMode   = [_cfgview bwEstMode];
+        _kit.streamerBase.logBlock = ^(NSString* str){
+            //NSLog(@"%@", str);
+        };
+        _hostURL = [NSURL URLWithString:[_cfgview hostUrl]];
+        NSLog(@"streamer url:%@", _hostURL);
+    }
+}
+
+- (void)streamStateChanged{
+    NSLog(@"stream State %@", [_kit.streamerBase getCurStreamStateName]);
+    switch (_kit.streamerBase.streamState) {
+        case KSYStreamStateIdle:
+            _streamState.text = @"空闲状态";
+            break;
+        case KSYStreamStateConnecting:
+            _streamState.text = @"连接中";
+            break;
+        case KSYStreamStateConnected:
+            _streamState.text = @"已连接";
+            break;
+        case KSYStreamStateDisconnecting:
+            _streamState.text = @"失去连接";
+            break;
+        case KSYStreamStateError:
+            _streamState.text = @"连接错误";
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -74,43 +129,24 @@
 
     self.kwSdkUI.kwSdk.cameraPositionBack  = NO;
     if([KWRenderer isSdkInitFailed]){
-        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"使用 license 文件生成激活码时失败，可能是授权文件过期。" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-        //
-        //        [alert show];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"使用 license 文件生成激活码时失败，可能是授权文件过期。" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        
+        [alert show];
         return;
     }
     
     [self.kwSdkUI setViewDelegate:self];
     [self.kwSdkUI.kwSdk initSdk];
+    
+    [self initKSYStreamerSettings];
 
     self.videoCamera.horizontallyMirrorFrontFacingCamera = YES;
     self.videoCamera.horizontallyMirrorRearFacingCamera = NO;
     self.kwSdkUI.isClearOldUI = YES;
     
-    //推流功能
-    NSString * devCode = [[[[[UIDevice currentDevice] identifierForVendor] UUIDString] substringToIndex:3] lowercaseString];
-    NSString *rtmpSrv = @"rtmp://test.uplive.ks-cdn.com/live";
-    _hostURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", rtmpSrv, devCode]];
-    NSLog(@"streamer url: %@", _hostURL);
-    [self addObservers];
-    // 音频采集模块
-    _aCapDev = [[KSYAUAudioCapture alloc] init];
-    _streamerBase = [[KSYStreamerBase alloc] initWithDefaultCfg];
-    _streamerBase.videoCodec = KSYVideoCodec_VT264;
-    _streamerBase.audioCodec = KSYAudioCodec_AT_AAC;
-    _streamerBase.videoEncodePerf = KSYVideoEncodePer_HighPerformance;
-    _streamerBase.audiokBPS  = 64;
-    _streamerBase.videoMaxBitrate  = 1024;
-    _streamerBase.videoInitBitrate = 600;
-    _streamerBase.videoMinBitrate  = 200;
-    // GPU 上的数据导出到streamer
-    _aMixer = [[KSYAudioMixer alloc]init];
-    // 组装音频通道
-    [self setupAudioPath];
-    
     /******** 录制功能 *********************/
     self.kwSdkUI.kwSdk.videoCamera = self.videoCamera;
-    self.kwSdkUI.previewView = self.previewView;
+    self.kwSdkUI.previewView = _kit.preview;
     self.kwSdkUI.kwSdk.movieWriter = self.movieWriter;
     
     [self.kwSdkUI initSDKUI];
@@ -147,8 +183,7 @@
             [KWSDK_UI releaseManager];
             [KWSDK releaseManager];
             
-            [_aCapDev stopCapture];
-            [self rmObservers];
+            [_kit stopPreview];
             
         }];
     };
@@ -172,6 +207,8 @@
 //        
 //    };
 
+    [self.view addSubview:self.streamState];
+
     [self.view addSubview:self.labRecordState];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
@@ -179,86 +216,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil]; //监听是否重新进入程序程序.
-    //开启音频采集
-    if (_aCapDev){
-        [_aCapDev startCapture];
-    }
-}
-
-// 将声音送入混音器
-- (void) mixAudio:(CMSampleBufferRef)buf to:(int)idx{
-    if (![_streamerBase isStreaming]){
-        return;
-    }
-    [_aMixer processAudioSampleBuffer:buf of:idx];
-}
-// 组装声音通道
-- (void) setupAudioPath {
-    weakObj(self);
-    //1. 音频采集, 语音数据送入混音器
-    _aCapDev.audioProcessingCallback = ^(CMSampleBufferRef buf){
-
-        [selfWeak mixAudio:buf to:0];
-    };
-    // 混音结果送入streamer
-    _aMixer.audioProcessingCallback = ^(CMSampleBufferRef buf){
-        if (![selfWeak.streamerBase isStreaming]){
-            return;
-        }
-        [selfWeak.streamerBase processAudioSampleBuffer:buf];
-    };
-    // mixer 的主通道为麦克风,时间戳以main通道为准
-    _aMixer.mainTrack = 0;
-    [_aMixer setTrack:0 enable:YES];
-}
-
-- (void) addObservers {
-    //KSYStreamer state changes
-    NSNotificationCenter* dc = [NSNotificationCenter defaultCenter];
-    [dc addObserver:self
-           selector:@selector(onStreamStateChange:)
-               name:KSYStreamStateDidChangeNotification
-             object:nil];
-    [dc addObserver:self
-           selector:@selector(onNetStateEvent:)
-               name:KSYNetStateEventNotification
-             object:nil];
-}
-
-- (void) rmObservers {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark -  state change
-- (void) onNetStateEvent     :(NSNotification *)notification{
-    NSLog(@"netevent %lu", (unsigned long)_streamerBase.netStateCode);
-}
-
-- (void) onStreamStateChange :(NSNotification *)notification{
-    NSLog(@"stream State %@", [_streamerBase getCurStreamStateName]);
-    if(_streamerBase.streamState == KSYStreamStateError) {
-        [self onStreamError:_streamerBase.streamErrorCode];
-    }
-}
-
-- (void) onStreamError:(KSYStreamErrorCode) errCode{
-    if (errCode == KSYStreamErrorCode_CONNECT_BREAK) {
-        // Reconnect
-        dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
-        dispatch_after(delay, dispatch_get_main_queue(), ^{
-            _streamerBase.bWithVideo = YES;
-            [_streamerBase startStream:self.hostURL];
-        });
-    }
-    else if (errCode == KSYStreamErrorCode_AV_SYNC_ERROR) {
-        NSLog(@"audio video is not synced, please check timestamp");
-        dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
-        dispatch_after(delay, dispatch_get_main_queue(), ^{
-            NSLog(@"try again");
-            _streamerBase.bWithVideo = YES;
-            [_streamerBase startStream:self.hostURL];
-        });
-    }
+    //启动金山音频采集
+    [_kit startAudioCap];
 }
 
 //拍照
@@ -273,12 +232,12 @@
 }
 
 - (void) onStream{
-    if (_streamerBase.streamState == KSYStreamStateIdle ||
-        _streamerBase.streamState == KSYStreamStateError) {
-        [_streamerBase startStream:self.hostURL];
+    if (_kit.streamerBase.streamState == KSYStreamStateIdle ||
+        _kit.streamerBase.streamState == KSYStreamStateError) {
+        [_kit.streamerBase startStream:self.hostURL];
     }
     else {
-        [_streamerBase stopStream];
+        [_kit.streamerBase stopStream];
     }
 }
 
@@ -301,8 +260,6 @@
     [[NSFileManager defaultManager] removeItemAtURL:self.movieURL error:nil];
     
     [self.videoCamera startCameraCapture];
-    
-    [self.previewView setHidden:NO];
     
     [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_0;
     
@@ -335,16 +292,34 @@
 
 -(void)didClickOffPhoneButton
 {
+    if(_kit.streamerBase.streamState == KSYStreamStateConnected){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"请断开直播再操作" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        return;
+    }
     [self takePhoto];
 }
 
 -(void)didBeginLongPressOffPhoneButton
 {
+    if(_kit.streamerBase.streamState == KSYStreamStateConnected){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"请断开直播再操作" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        return;
+    }
     [self startRecording];
 }
 
 -(void)didEndLongPressOffPhoneButton
 {
+    if(_kit.streamerBase.streamState == KSYStreamStateConnected){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"请断开直播再操作" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        return;
+    }
     [self endRecording];
 }
 
@@ -384,22 +359,10 @@
         
 
         [_videoCamera startCameraCapture];
-        [self.previewView setHidden:NO];
 
         [_videoCamera addTarget:self.movieWriter];
-        [_videoCamera addTarget:self.previewView];
     }
     return _videoCamera;
-}
-
-- (GPUImageView *)previewView
-{
-    if (!_previewView) {
-        _previewView = [[GPUImageView alloc] initWithFrame:self.view.frame];
-        _previewView.fillMode = kGPUImageFillModeStretch;
-        _previewView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    }
-    return _previewView;
 }
 
 - (GPUImageMovieWriter *)movieWriter
@@ -483,7 +446,8 @@
     
     // watermark
     CGSize renderSize = videoComposition.renderSize;
-    CGFloat ratio = MIN(renderSize.width / CGRectGetWidth(self.previewView.frame), renderSize.height / CGRectGetHeight(self.previewView.frame));
+    //CGFloat ratio = MIN(renderSize.width / CGRectGetWidth(self.previewView.frame), renderSize.height / CGRectGetHeight(self.previewView.frame));
+    CGFloat ratio = MIN(renderSize.width / CGRectGetWidth(_kit.preview.frame), renderSize.height / CGRectGetHeight(_kit.preview.frame));
     CGFloat watermarkWidth = ceil(renderSize.width / 5.);
     CGFloat watermarkHeight = ceil(watermarkWidth * CGRectGetHeight(self.watermarkLayer.frame) / CGRectGetWidth(self.watermarkLayer.frame));
     //
@@ -636,8 +600,6 @@
         
         [self.videoCamera startCameraCapture];
         
-        [self.previewView setHidden:NO];
-        
         [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_0;
         
         [self.kwSdkUI.kwSdk resetDistortionParams];
@@ -662,7 +624,17 @@
     return _labRecordState;
 }
 
-
+- (UILabel *)streamState
+{
+    if (!_streamState) {
+        _streamState = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth_KW, 50)];
+        [_streamState setText:@""];
+        [_streamState setFont:[UIFont systemFontOfSize:14.f]];
+        [_streamState setTextAlignment:NSTextAlignmentCenter];
+        [_streamState setTextColor:[UIColor redColor]];
+    }
+    return _streamState;
+}
 
 //拍照
 - (void)takePhoto:(UIButton *)sender
@@ -792,11 +764,6 @@ static void KSYARGBRotate(uint8_t* src_argb, uint8_t* dst_argb, int width, int h
     self.outputWidth = CVPixelBufferGetWidth(pixelBuffer);
     self.outputheight = CVPixelBufferGetHeight(pixelBuffer);
     /*********** End ***********/
-    
-    //视频处理及推流
-    if (![_streamerBase isStreaming]){
-        return;
-    }
     if (iDeviceOrientation == UIDeviceOrientationPortrait){
         NSDictionary* pixelBufferOptions = @{
                                              (NSString*) kCVPixelBufferWidthKey : @(self.outputheight),
@@ -821,11 +788,11 @@ static void KSYARGBRotate(uint8_t* src_argb, uint8_t* dst_argb, int width, int h
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         CVPixelBufferUnlockBaseAddress(streamerBuffer, 0);
         CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-        [_streamerBase processVideoPixelBuffer:streamerBuffer timeInfo:pts];
-        
+        [_kit.capToGpu processPixelBuffer:streamerBuffer time:pts];
+
         CFRelease(streamerBuffer);
     }else{
-        [_streamerBase processVideoSampleBuffer:sampleBuffer];
+        [_kit.capToGpu processSampleBuffer:sampleBuffer];
     }
 }
 

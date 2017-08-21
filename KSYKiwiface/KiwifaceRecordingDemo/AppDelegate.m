@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "KWVideoShowViewController.h"
+#import "KSYPresetCfgVC.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,15 +19,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//
-//    self.window.backgroundColor = [UIColor whiteColor];
-//    
-//    KWVideoShowViewController *rootViewController = [KWVideoShowViewController new];
-//    
-//    self.window.rootViewController = rootViewController;
-//    
-//    [self.window makeKeyAndVisible];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    // 初始化根控制器
+    KSYPresetCfgVC *presetCfg = [[KSYPresetCfgVC alloc] init];
+    self.window.rootViewController = presetCfg;
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
