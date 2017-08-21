@@ -29,18 +29,20 @@ pod 'libksygpulive/libksygpulive'
 
 ### 3. 集成工作
 
-1. 添加推流类KSYStreamerBase, 运行过程中提供对KSYStreamerBase的访问，同时添加音频采集类KSYAUAudioCapture,  控制音频的采集和推流处理.
+1. 添加金山直播推流类KSYGPUStreamerKit, 运行过程中提供对预览preview和KSYStreamerBase的访问，同时添加音频采集类KSYAUAudioCapture,  控制音频的采集和推流处理.
 
 2. 配置KSYStreamerBase的一些主要参数，添加推流按钮来开启和关闭推流.
 
-3. 处理后的视频数据通过willOutputSampleBuffer函数回调出来，推流视频在这个函数里面完成
+3. 添加kiwi视频采集和kiwiSdk，运行过程中提供对视频的采集和kiwiSdk处理.
 
-* sampleBuffer 是加filter后的数据流，但是直接出来的数据需要进行旋转或镜像处理
-* processVideoPixelBuffer:timeInfo 是推流函数，将旋转或镜像处理后视频数据推到观众端
+4. 处理后的视频数据通过willOutputSampleBuffer函数回调出来，推流视频在这个函数里面完成
+
+* sampleBuffer 是视频采集回调出来的数据流，通过renderer添加filter处理，但是处理后的数据需要进行旋转或镜像处理
+* capToGpu 将数据流传到gpu上进行推流，方便后续添加水印或是filter的处理
 
 ### 4. 接口介绍
 
-* 音频数据处理
+* 金山推流音频数据
 
 ```
 /**
@@ -51,7 +53,7 @@ pod 'libksygpulive/libksygpulive'
 - (void)processAudioSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 ```
 
-* 视频数据处理
+* 金山推流视频数据
 
 ```
 /**
@@ -63,6 +65,28 @@ pod 'libksygpulive/libksygpulive'
 */
 - (void)processVideoPixelBuffer:(CVPixelBufferRef)pixelBuffer
 timeInfo:(CMTime)timeStamp;
+```
+
+* kiwi视频采集后回调
+
+```
+/**
+@abstract  视频采集后回调视频帧
+@param sampleBuffer 视频采集回调数据
+*/
+- (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+```
+
+* kiwi视频filter处理
+
+```
+/**
+@abstract  视频采集后回调视频帧
+@param pixelBuffer 视频采集回调数据进行filter处理
+@param rotation 数据图像方向
+@param isMirrored 数据图像是否需要做镜像处理
+*/
+- (void)processPixelBuffer:(CVPixelBufferRef)pixelBuffer withRotation:(cv_rotate_type)rotation mirrored:(BOOL)isMirrored;
 ```
 ### 5. 商务合作
 * 金山云
