@@ -35,7 +35,7 @@ pod 'libksygpulive/libksygpulive'
 4. 处理后的视频数据通过didVideoFrameReceived函数回调出来，推流视频在这个函数里面完成
 
 * pixelBuffer 是背景替换后的数据流
-* capToGpu 将数据流传到gpu上，方便后续添加水印或是filter的处理
+* capToGpu 将数据流传到gpu上进行推流，方便后续添加水印或是filter的处理
 
 ### 4. 接口介绍
 
