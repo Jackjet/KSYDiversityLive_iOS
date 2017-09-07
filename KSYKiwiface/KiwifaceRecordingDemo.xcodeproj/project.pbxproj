@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050DCC081F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DCC071F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.m */; };
 		0517301F1F46D5D7007B16D8 /* KSYNameSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 051730161F46D5D7007B16D8 /* KSYNameSlider.m */; };
 		051730201F46D5D7007B16D8 /* KSYPresetCfgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 051730181F46D5D7007B16D8 /* KSYPresetCfgVC.m */; };
 		051730211F46D5D7007B16D8 /* KSYPresetCfgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517301A1F46D5D7007B16D8 /* KSYPresetCfgView.m */; };
@@ -211,6 +212,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050DCC061F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYKiwiGPUStreamerKit.h; sourceTree = "<group>"; };
+		050DCC071F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYKiwiGPUStreamerKit.m; sourceTree = "<group>"; };
 		051730151F46D5D7007B16D8 /* KSYNameSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYNameSlider.h; sourceTree = "<group>"; };
 		051730161F46D5D7007B16D8 /* KSYNameSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYNameSlider.m; sourceTree = "<group>"; };
 		051730171F46D5D7007B16D8 /* KSYPresetCfgVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPresetCfgVC.h; sourceTree = "<group>"; };
@@ -494,6 +497,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050DCC051F60EF5A00C7C77E /* source */ = {
+			isa = PBXGroup;
+			children = (
+				050DCC061F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.h */,
+				050DCC071F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.m */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
 		051730141F46D5D7007B16D8 /* KSYConfigVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +555,7 @@
 				168835261E45BE300016210E /* LaunchScreen.storyboard */,
 				168835291E45BE300016210E /* Info.plist */,
 				168835181E45BE300016210E /* Supporting Files */,
+				050DCC051F60EF5A00C7C77E /* source */,
 			);
 			path = KiwifaceRecordingDemo;
 			sourceTree = "<group>";
@@ -1173,6 +1186,7 @@
 				051730221F46D5D7007B16D8 /* KSYUIVC.m in Sources */,
 				BE9BA5831ED2B5C1002F3DA6 /* KWDistortionCell.m in Sources */,
 				BE9BA5721ED2B5C1002F3DA6 /* UIButton+WebCache.m in Sources */,
+				050DCC081F60EF5A00C7C77E /* KSYKiwiGPUStreamerKit.m in Sources */,
 				BE9BA5791ED2B5C1002F3DA6 /* ioapi.c in Sources */,
 				BE9BA57E1ED2B5C1002F3DA6 /* UIDevice+DeviceModel.m in Sources */,
 				BE9BA5771ED2B5C1002F3DA6 /* UIImageView+WebCache.m in Sources */,

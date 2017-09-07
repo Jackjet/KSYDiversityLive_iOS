@@ -15,7 +15,7 @@
 
 #import "Global.h"
 #import <GPUImage/GPUImage.h>
-#import <libksygpulive/KSYGPUStreamerKit.h>
+#import "KSYKiwiGPUStreamerKit.h"
 
 #define weakObj(o) __weak typeof(o) o##Weak = o;
 
@@ -37,7 +37,7 @@
 
 // 推流地址 完整的URL
 @property (nonatomic, strong) UILabel *streamState;
-@property (nonatomic, retain) KSYGPUStreamerKit *kit;
+@property (nonatomic, retain) KSYKiwiGPUStreamerKit *kit;
 @property NSURL * hostURL;
 
 @end
@@ -55,8 +55,9 @@
 - (void)initKSYStreamerSettings
 {
     //streamkit initialized
-    _kit = [[KSYGPUStreamerKit alloc] initWithDefaultCfg];
+    _kit = [[KSYKiwiGPUStreamerKit alloc] initWithDefaultCfg];
     _kit.videoOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    _kit.captureDimension = CGSizeMake(640, 480);
     _kit.previewDimension = [self.cfgview capResolutionSize];
     _kit.streamDimension  = [self.cfgview strResolutionSize];
     _kit.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA;
@@ -685,30 +686,26 @@
 static void KSYARGBRotate(uint8_t* src_argb, uint8_t* dst_argb, int width, int height,
                cv_rotate_type mode, BOOL mirrored) {
     int i, j;
-    
-    if (mode == CV_CLOCKWISE_ROTATE_90){
-        if (mirrored){
-            for (j = 0; j < height; j++){
-                for (i = 0; i < width; i++){
-                    dst_argb[i*4*height+4*j] = src_argb[j*4*width+4*i];
-                    dst_argb[i*4*height+4*j+1] = src_argb[j*4*width+4*i+1];
-                    dst_argb[i*4*height+4*j+2] = src_argb[j*4*width+4*i+2];
-                    dst_argb[i*4*height+4*j+3] = src_argb[j*4*width+4*i+3];
-                }
+    if (mirrored){
+        for (j = 0; j < height; j++){
+            for (i = 0; i < width; i++){
+                dst_argb[i*4*height+4*j] = src_argb[j*4*width+4*i];
+                dst_argb[i*4*height+4*j+1] = src_argb[j*4*width+4*i+1];
+                dst_argb[i*4*height+4*j+2] = src_argb[j*4*width+4*i+2];
+                dst_argb[i*4*height+4*j+3] = src_argb[j*4*width+4*i+3];
             }
-        }else{
-            for (j = 0; j < height; j++){
-                for (i = 0; i < width; i++){
-                    dst_argb[i*4*height+4*(height-1-j)] = src_argb[j*4*width+4*i];
-                    dst_argb[i*4*height+4*(height-1-j)+1] = src_argb[j*4*width+4*i+1];
-                    dst_argb[i*4*height+4*(height-1-j)+2] = src_argb[j*4*width+4*i+2];
-                    dst_argb[i*4*height+4*(height-1-j)+3] = src_argb[j*4*width+4*i+3];
-                }
+        }
+    }else{
+        for (j = 0; j < height; j++){
+            for (i = 0; i < width; i++){
+                dst_argb[i*4*height+4*(height-1-j)] = src_argb[j*4*width+4*i];
+                dst_argb[i*4*height+4*(height-1-j)+1] = src_argb[j*4*width+4*i+1];
+                dst_argb[i*4*height+4*(height-1-j)+2] = src_argb[j*4*width+4*i+2];
+                dst_argb[i*4*height+4*(height-1-j)+3] = src_argb[j*4*width+4*i+3];
             }
         }
     }
 }
-
 
 - (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 {
@@ -721,79 +718,78 @@ static void KSYARGBRotate(uint8_t* src_argb, uint8_t* dst_argb, int width, int h
     mirrored = !self.kwSdkUI.kwSdk.cameraPositionBack && self.videoCamera.horizontallyMirrorFrontFacingCamera;
 
     cv_rotate_type cvMobileRotate;
+    UIInterfaceOrientation orie;
     
     switch (iDeviceOrientation) {
         case UIDeviceOrientationPortrait:
             cvMobileRotate = CV_CLOCKWISE_ROTATE_90;
             [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_0;
+            orie = UIInterfaceOrientationPortrait;
             break;
             
         case UIDeviceOrientationLandscapeLeft:
             cvMobileRotate = mirrored ? CV_CLOCKWISE_ROTATE_180 : CV_CLOCKWISE_ROTATE_0;
             [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_270;
+            orie = UIInterfaceOrientationLandscapeRight;
             break;
             
         case UIDeviceOrientationLandscapeRight:
             cvMobileRotate = mirrored ? CV_CLOCKWISE_ROTATE_0 : CV_CLOCKWISE_ROTATE_180;
             [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_90;
+            orie = UIInterfaceOrientationLandscapeLeft;
             break;
             
         case UIDeviceOrientationPortraitUpsideDown:
             cvMobileRotate = CV_CLOCKWISE_ROTATE_270;
             [Global sharedManager].PIXCELBUFFER_ROTATE = KW_PIXELBUFFER_ROTATE_180;
+            orie = UIInterfaceOrientationPortraitUpsideDown;
             break;
             
         default:
             cvMobileRotate = CV_CLOCKWISE_ROTATE_0;
+            orie = UIInterfaceOrientationPortrait;
             break;
     }
     
     
     [self.kwSdkUI.kwSdk.renderer processPixelBuffer:pixelBuffer withRotation:cvMobileRotate mirrored:mirrored];
     
-//    if (!self.kwSdkUI.kwSdk.renderer.trackResultState) {
-//        NSLog(@"没有捕捉到人脸！！！！！！！！！！！！！！！！！！！！！！！！！");
-//    }
-//    else
-//    {
-//        NSLog(@"捕捉到人脸！！！！！！！！！！！！！！！！！！！！！！！！！");
-//    }
-    
     /*********** 如果有拍照功能则必须加上 ***********/
     self.outputImage =  [CIImage imageWithCVPixelBuffer:pixelBuffer];
     self.outputWidth = CVPixelBufferGetWidth(pixelBuffer);
     self.outputheight = CVPixelBufferGetHeight(pixelBuffer);
-    /*********** End ***********/
-    if (iDeviceOrientation == UIDeviceOrientationPortrait){
-        NSDictionary* pixelBufferOptions = @{
-                                             (NSString*) kCVPixelBufferWidthKey : @(self.outputheight),
-                                             (NSString*) kCVPixelBufferHeightKey : @(self.outputWidth),
-                                             (NSString*) kCVPixelBufferOpenGLESCompatibilityKey : @YES,
-                                             (NSString*) kCVPixelBufferIOSurfacePropertiesKey : @{}};
-        CVPixelBufferRef streamerBuffer = NULL;
-        CVReturn ret = CVPixelBufferCreate(kCFAllocatorDefault, self.outputheight, self.outputWidth, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef)pixelBufferOptions, &streamerBuffer);
-        if (ret!= noErr) {
-            NSLog(@"创建streamer buffer失败");
-            streamerBuffer = NULL;
-            return;
-        }
-        
-        CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-        CVPixelBufferLockBaseAddress(streamerBuffer, 0);
-        uint8_t *src_frame      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-        uint8_t *dst_frame      = CVPixelBufferGetBaseAddressOfPlane(streamerBuffer, 0);
-        int wdt = (int)CVPixelBufferGetWidth(pixelBuffer);
-        int hgt = (int)CVPixelBufferGetHeight(pixelBuffer);
-        KSYARGBRotate(src_frame, dst_frame, wdt, hgt, cvMobileRotate, mirrored);
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-        CVPixelBufferUnlockBaseAddress(streamerBuffer, 0);
-        CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
-        [_kit.capToGpu processPixelBuffer:streamerBuffer time:pts];
-
-        CFRelease(streamerBuffer);
-    }else{
-        [_kit.capToGpu processSampleBuffer:sampleBuffer];
+    
+    //是否需要旋转
+    [_kit rotateStreamTo:orie];
+    
+    //推流
+    NSDictionary* pixelBufferOptions = @{
+                                         (NSString*) kCVPixelBufferWidthKey : @(self.outputheight),
+                                         (NSString*) kCVPixelBufferHeightKey : @(self.outputWidth),
+                                         (NSString*) kCVPixelBufferOpenGLESCompatibilityKey : @YES,
+                                         (NSString*) kCVPixelBufferIOSurfacePropertiesKey : @{}};
+    CVPixelBufferRef streamerBuffer = NULL;
+    CVReturn ret = CVPixelBufferCreate(kCFAllocatorDefault, self.outputheight, self.outputWidth, kCVPixelFormatType_32BGRA, (__bridge CFDictionaryRef)pixelBufferOptions, &streamerBuffer);
+    if (ret!= noErr) {
+        NSLog(@"创建streamer buffer失败");
+        streamerBuffer = NULL;
+        return;
     }
+    
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    CVPixelBufferLockBaseAddress(streamerBuffer, 0);
+    uint8_t *src_frame      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    uint8_t *dst_frame      = CVPixelBufferGetBaseAddressOfPlane(streamerBuffer, 0);
+    int wdt = (int)CVPixelBufferGetWidth(pixelBuffer);
+    int hgt = (int)CVPixelBufferGetHeight(pixelBuffer);
+    KSYARGBRotate(src_frame, dst_frame, wdt, hgt, cvMobileRotate, mirrored);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    CVPixelBufferUnlockBaseAddress(streamerBuffer, 0);
+    CMTime pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer);
+    [_kit.capToGpu processPixelBuffer:streamerBuffer time:pts];
+    
+    CFRelease(streamerBuffer);
+    /*********** End ***********/
 }
 
 - (UIImage *)image:(UIImage *)image rotation:(UIImageOrientation)orientation
@@ -888,6 +884,5 @@ static void KSYARGBRotate(uint8_t* src_argb, uint8_t* dst_argb, int width, int h
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
 
 @end
