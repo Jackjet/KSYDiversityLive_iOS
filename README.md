@@ -32,9 +32,9 @@
 * [Airplay录屏直播](KSYAirPlayDemo)
 * [应用内录屏](https://github.com/ksvc/KSYMediaPlayer_iOS/wiki/playerRecord)
 * [短视频编辑](https://github.com/ksvc/KSYMediaEditorKit_iOS)
-* 动态贴纸：[商汤科技](SenseTime)、[项芯科技](FaceUnitySDK)
+* 动态贴纸：[商汤科技](SenseTime)、[项芯科技](FaceUnitySDK)、[开为科技](KSYKiwiface)
 * 无人机直播，已经支持多家无人机、云台直播方案，请直接联系商务
-* 多种美颜：[涂图美颜](TuSDK)
+* 多种美颜：[涂图美颜](TuSDK)、[开为科技](KSYKiwiface)
 * [画中画](https://github.com/ksvc/KSYLive_iOS/wiki/pip)
 * [大眼瘦脸](KSYKiwiface)
 * [背景替换](KSYNVSDK)
@@ -59,7 +59,7 @@
 1. 2016年12月5日，基于[声网连麦方案](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/agora_v1.0.0)上线；
 1. 2017年5月18日，基于xindawn的[Airplay任意录屏方案(iOS 7.0+)](https://github.com/ksvc/KSYDiversityLive_iOS/releases/tag/KSYAirPlayDemo_v1.0)上线；
 1. 2017年7月1日，基于金山云自研的[Airplay手游录屏方案](https://github.com/ksvc/KSYAirStreamer_iOS/releases)上线；
-1. 2017年8月4日，[开为科技大眼瘦脸](KSYKiwiface)直播上线；
+1. 2017年8月4日，[开为科技动态贴纸方案](KSYKiwiface)直播上线；
 1. 2017年8月11日，[美摄背景替换](KSYNVSDK)直播上线；
 
 ### 7. 反馈与建议
