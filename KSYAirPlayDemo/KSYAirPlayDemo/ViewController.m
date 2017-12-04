@@ -51,7 +51,7 @@ inline static int64_t getABSTime() {
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString * devCode = [[[[[UIDevice currentDevice] identifierForVendor] UUIDString] substringToIndex:3] lowercaseString];
-    NSString *rtmpSrv = @"rtmp://test.uplive.ks-cdn.com/live";
+    NSString *rtmpSrv = @"rtmp://120.92.224.235/live";
     _rtmpUrl.text = [  NSString stringWithFormat:@"%@/%@", rtmpSrv, devCode];
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self.view action:@selector(endEditing:)];
     tapGes.delegate = self;

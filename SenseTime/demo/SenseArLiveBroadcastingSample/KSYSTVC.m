@@ -47,7 +47,7 @@ static int count = 74;
     _kit.capturePixelFormat   = kCVPixelFormatType_32BGRA;
 }
 - (void)setStream{
-    _strRTMPURL = @"rtmp://test.uplive.ks-cdn.com/live/123";
+    _strRTMPURL = @"rtmp://120.92.224.235/live/123";
 }
 
 - (void)setFilter{

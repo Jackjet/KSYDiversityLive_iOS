@@ -11,7 +11,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     NSString *devCode  = [ [[[UIDevice currentDevice] identifierForVendor] UUIDString] substringToIndex:3];
-    NSString *streamSrv  = @"rtmp://test.uplive.ksyun.com/live";
+    NSString *streamSrv  = @"rtmp://120.92.224.235/live";
     NSString *streamUrl      = [ NSString stringWithFormat:@"%@/%@", streamSrv, devCode];
     KSYPresetCfgVC *vc =  [[KSYPresetCfgVC alloc]initWithURL:streamUrl];
     self.window.rootViewController = vc;

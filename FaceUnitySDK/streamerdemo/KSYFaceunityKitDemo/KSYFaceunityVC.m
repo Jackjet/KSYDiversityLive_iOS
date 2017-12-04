@@ -430,7 +430,7 @@
     _kit.streamerBase.logBlock = ^(NSString* str){
         //            NSLog(@"%@", str);
     };
-    _hostURL = [NSURL URLWithString:@"rtmp://test.uplive.ksyun.com/live/823"];
+    _hostURL = [NSURL URLWithString:@"rtmp://120.92.224.235/live/823"];
 }
 
 - (void) updateStreamCfg: (BOOL) bStart {
