@@ -8,6 +8,7 @@
 
 
 #import "KSYRKStreamerKit.h"
+@import CoreTelephony;
 
 @interface KSYRKStreamerKit(){
 }
@@ -20,12 +21,12 @@
     static dispatch_once_t pred = 0;
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
-        _sharedObject = [[KSYRKStreamerKit alloc] initWithDefaultCfg];
+        _sharedObject = [[KSYRKStreamerKit alloc] init];
     });
     return _sharedObject;
 }
 
-- (id) initWithDefaultCfg {
+- (id) init {
     self = [super init];
     _rtmpUrl = nil;
     // 创建 推流模块
@@ -46,6 +47,11 @@
     // 组装音频通道
     [self setupAudioPath];
     [self addObservers];
+    
+    CTCellularData *cellularData = [[CTCellularData alloc]init];
+    cellularData.cellularDataRestrictionDidUpdateNotifier =  ^(CTCellularDataRestrictedState state){
+        NSLog(@"state : %ld", (long)state);
+    };
     return self;
 }
 - (void)dealloc {
@@ -93,9 +99,11 @@
 }
 
 - (void) onStreamStateChange :(NSNotification *)notification{
-    NSLog(@"stream State %@", [_streamerBase getCurStreamStateName]);
     if(_streamerBase.streamState == KSYStreamStateError) {
         [self onStreamError: _streamerBase.streamErrorCode];
+    }
+    else {
+        NSLog(@"stream State %@", [_streamerBase getCurStreamStateName]);
     }
 }
 - (void) onStreamError:(KSYStreamErrorCode) errCode{

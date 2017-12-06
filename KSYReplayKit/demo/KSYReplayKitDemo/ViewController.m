@@ -114,21 +114,23 @@
     }
     __weak ViewController* bSelf = self;
     [broadcastController startBroadcastWithHandler:^(NSError * _Nullable error) {
-        if (!error) {
-            bSelf.broadcastController.delegate = self;
-            bSelf.btnShare.backgroundColor = [UIColor greenColor];
-            
-            UIView* cameraView = [[RPScreenRecorder sharedRecorder] cameraPreviewView];
-            bSelf.cameraPreview = cameraView;
-            if(cameraView) {
-                cameraView.frame = CGRectMake(30, 300, 164, 164);
-                [bSelf.view addSubview:cameraView];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                bSelf.broadcastController.delegate = self;
+                bSelf.btnShare.backgroundColor = [UIColor greenColor];
+                
+                UIView* cameraView = [[RPScreenRecorder sharedRecorder] cameraPreviewView];
+                bSelf.cameraPreview = cameraView;
+                if(cameraView) {
+                    cameraView.frame = CGRectMake(30, 300, 164, 164);
+                    [bSelf.view addSubview:cameraView];
+                }
             }
-        }
-        else {
-            bSelf.btnShare.backgroundColor = [UIColor redColor];
-            NSLog(@"startBroadcast %@",error.localizedDescription);
-        }
+            else {
+                bSelf.btnShare.backgroundColor = [UIColor redColor];
+                NSLog(@"startBroadcast %@",error.localizedDescription);
+            }
+        });
     }];
 }
 
