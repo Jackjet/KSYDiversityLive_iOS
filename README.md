@@ -62,7 +62,7 @@
 1. 2017年7月1日，基于金山云自研的[Airplay手游录屏方案](https://github.com/ksvc/KSYAirStreamer_iOS/releases)上线；
 1. 2017年8月4日，[开为科技动态贴纸方案](KSYKiwiface)直播上线；
 1. 2017年8月11日，[美摄背景替换](KSYNVSDK)直播上线；
-1. 2017年12月18日，[xfyun语言听写](https://github.com/ksvc/KSYDiversityLive_iOS/tree/master/KSYXFStreamerDemo)接入示例发布；
+1. 2017年12月18日，[xfyun语言听写](KSYXFStreamerDemo)接入示例发布；
 
 ### 7. 反馈与建议
 #### 7.1 反馈模板  
