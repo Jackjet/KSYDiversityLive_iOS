@@ -83,8 +83,9 @@ pod 'libksygpulive/libksygpulive'
 * 水印处理 
 
 ```
-         _streamerKit.textLabel.text = resultString;
-        [_streamerKit updateTextLabel];
+ _streamerKit.textLabel.text = resultString;
+[_streamerKit updateTextLabel];
+
 ```
 * 推流
 
