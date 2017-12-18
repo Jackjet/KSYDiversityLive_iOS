@@ -7,5 +7,6 @@ target 'KSYXFStreamerDemo' do
   # use_frameworks!
   pod 'libksygpulive/KSYGPUResource'
   pod 'libksygpulive/libksygpulive'
+  pod 'IQKeyboardManager'
 end
 

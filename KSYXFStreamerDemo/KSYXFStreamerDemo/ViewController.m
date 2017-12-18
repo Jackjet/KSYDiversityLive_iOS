@@ -59,19 +59,34 @@
     
 }
 - (IBAction)showText:(id)sender {
-    
+    [self startListening];
+}
+- (IBAction)hiddenText:(id)sender {
+    [self stopListening];
+}
+
+- (void)stopListening
+{
+    [_iFlySpeechRecognizer stopListening];
+    _iFlySpeechRecognizer = nil;
+    self.isAudioPlay = NO;
+    _streamerKit.textLabel.text = @" ";
+    [_streamerKit updateTextLabel];
+    NSLog(@"关闭字幕");
+}
+
+- (void)startListening
+{
+    if (!_iFlySpeechRecognizer) {
+        [self initIFlySpeech];
+    }
     BOOL ret  = [_iFlySpeechRecognizer startListening];
     if (ret) {
         self.isAudioPlay = YES;
         NSLog(@"打开字幕");
     }
-    
 }
-- (IBAction)hiddenText:(id)sender {
-    [_iFlySpeechRecognizer stopListening];
-    self.isAudioPlay = NO;
-    NSLog(@"关闭字幕");
-}
+
 
 
 - (void)handleSampleBufferRef:(CMSampleBufferRef )sampleBuffer
@@ -188,7 +203,7 @@
         [_iFlySpeechRecognizer setParameter:PUTONGHUA forKey:[IFlySpeechConstant ACCENT]];
         
         //set whether or not to show punctuation in recognition results
-        [_iFlySpeechRecognizer setParameter:@"1" forKey:[IFlySpeechConstant ASR_PTT]];
+        [_iFlySpeechRecognizer setParameter:@"0" forKey:[IFlySpeechConstant ASR_PTT]];
         
     }
     
