@@ -5,8 +5,7 @@
 
 ### 1.参考资料
 金山云直播SDK请参考 https://github.com/ksvc/KSYLive_iOS
-
-美摄SDK请参考http://www.xfyun.cn/
+讯飞SDK请参考http://www.xfyun.cn/
 
 ### 2.准备工作
 
