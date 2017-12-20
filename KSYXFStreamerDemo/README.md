@@ -7,7 +7,10 @@
 金山云直播SDK请参考 https://github.com/ksvc/KSYLive_iOS
 讯飞SDK请参考http://www.xfyun.cn/
 
-### 2.准备工作
+### 2.支持架构
+armv7 x86_64 arm64 
+
+### 3.准备工作
 
 1. 集成讯飞SDK，下载SDK，将文件夹lib和文件夹iflyMSC.framework文件拷贝到自己的项目中，参考讯飞工程集成
 
@@ -24,7 +27,7 @@ vim Podfile
 pod 'libksygpulive/libksygpulive'
 ```
 
-### 3. 集成工作
+### 4. 集成工作
 
 1. 添加金山直播推流类KSYGPUStreamerKit, 运行过程中提供对预览preview和推流streamerBase的访问， 控制音频的采集和推流处理.
 
@@ -37,7 +40,7 @@ pod 'libksygpulive/libksygpulive'
 5. 文字设置可参考kit的textLabel的实现，实现自定义样式试图.
 
 
-### 4. 接口介绍
+### 5. 接口介绍
 
 * 摄像头采集音频数据
 
@@ -101,7 +104,7 @@ pod 'libksygpulive/libksygpulive'
  */
 - (void) startStream: (NSURL*)     url;
 ```
-### 5. 联系方式
+### 6. 联系方式
 * 金山云
 
 - 主页：[金山云](http://v.ksyun.com)
