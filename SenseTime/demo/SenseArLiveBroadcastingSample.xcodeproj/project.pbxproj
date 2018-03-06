@@ -372,7 +372,7 @@
 					"-lresolv.9",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYLiveDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.media.diversity.sticker.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -409,7 +409,7 @@
 					"-lresolv.9",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.ios.KSYLiveDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.media.diversity.sticker.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
