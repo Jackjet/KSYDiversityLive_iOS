@@ -2,5 +2,5 @@ inhibit_all_warnings!
 
 target 'KiwifaceRecordingDemo' do
 	pod 'GPUImage', :path => './'
-	pod 'libksygpulive/libksygpulive'
+	pod 'libksygpulive/libksygpulive', '2.9.0'
 end
