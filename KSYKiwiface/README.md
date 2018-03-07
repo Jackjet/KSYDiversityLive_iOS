@@ -23,7 +23,7 @@ vim Podfile
 （2）在Podfile添加pod项目
 ```
 pod 'GPUImage', :path => './'
-pod 'libksygpulive/libksygpulive'
+pod 'libksygpulive/libksygpulive','2.9.0'
 ```
 其中GPUImage是kiwi提供的
 
